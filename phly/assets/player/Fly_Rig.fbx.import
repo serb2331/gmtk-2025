@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c4uibx5hn6xoa"
-path="res://.godot/imported/Fly.fbx-2997ccf08c220ca740683f357dfd305d.scn"
+uid="uid://d3m6o5mr2a6wd"
+path="res://.godot/imported/Fly_Rig.fbx-e03b72f9048a113c5316dbf5cc0a32ff.scn"
 
 [deps]
 
-source_file="res://Fly.fbx"
-dest_files=["res://.godot/imported/Fly.fbx-2997ccf08c220ca740683f357dfd305d.scn"]
+source_file="res://assets/player/Fly_Rig.fbx"
+dest_files=["res://.godot/imported/Fly_Rig.fbx-e03b72f9048a113c5316dbf5cc0a32ff.scn"]
 
 [params]
 
