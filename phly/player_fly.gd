@@ -26,7 +26,7 @@ func rotate_camera(delta: float):
 		pitch += ROTATION_SPEED * delta
 	if Input.is_action_pressed("rotate_down"):
 		pitch -= ROTATION_SPEED * delta
-	print(yaw)
+	#print(yaw)
 	# Rotate this node (TwistPivot) around Y
 	twist_pivot.rotate_y(deg_to_rad(yaw))
 
