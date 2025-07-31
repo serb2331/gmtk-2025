@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://browrbdltohk1"]
+[gd_scene load_steps=10 format=3 uid="uid://browrbdltohk1"]
 
-[ext_resource type="PackedScene" uid="uid://dcsdewssu0eov" path="res://ui_layer.tscn" id="1_4o3f6"]
-[ext_resource type="PackedScene" uid="uid://bc231hgtwqj5r" path="res://player_fly.tscn" id="1_88gup"]
+[ext_resource type="Script" uid="uid://coo0j4chw3x46" path="res://room.gd" id="1_4o3f6"]
+[ext_resource type="PackedScene" uid="uid://cmhuo4csf1fj4" path="res://player_fly.tscn" id="1_88gup"]
 [ext_resource type="PackedScene" uid="uid://cfy70qk473650" path="res://kitchen_environment.tscn" id="2_bisa2"]
+[ext_resource type="PackedScene" uid="uid://b1msn131f82fi" path="res://food.tscn" id="3_4o3f6"]
 
 [sub_resource type="Environment" id="Environment_bisa2"]
 
@@ -16,8 +17,20 @@
 size = Vector3(10.625, 1, 14.6358)
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_4o3f6")
+food_scene = ExtResource("3_4o3f6")
 
-[node name="CanvasLayer" parent="." instance=ExtResource("1_4o3f6")]
+[node name="CanvasLayer" parent="."]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+script = null
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_bisa2")
