@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpk07nlmupbte"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6gpfs"]
+albedo_color = Color(1.49205e-06, 0.367314, 0.367672, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_4x0hx"]
+material = SubResource("StandardMaterial3D_6gpfs")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8txok"]
+
+[node name="Food" type="Node3D"]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("SphereMesh_4x0hx")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("SphereShape3D_8txok")
