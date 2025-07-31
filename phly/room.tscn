@@ -1,15 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://browrbdltohk1"]
 
 [ext_resource type="PackedScene" uid="uid://bc231hgtwqj5r" path="res://player_fly.tscn" id="1_88gup"]
-
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_v321d"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_88gup"]
-size = Vector2(32, 32)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_88gup"]
-bottom_radius = 2.0
-height = 6.0
+[ext_resource type="PackedScene" uid="uid://bdfj5t5yxlybb" path="res://assets/environment/Kitchen_Environment.fbx" id="2_bisa2"]
 
 [sub_resource type="Environment" id="Environment_bisa2"]
 
@@ -17,25 +9,12 @@ height = 6.0
 
 [sub_resource type="Compositor" id="Compositor_v5vuv"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bisa2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bisa2"]
+size = Vector3(10.625, 1, 14.6358)
+
 [node name="Node3D" type="Node3D"]
-
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.139, 0.1, 0.254)
-shape = SubResource("WorldBoundaryShape3D_v321d")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-mesh = SubResource("PlaneMesh_88gup")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.62758, 0, 0)
-mesh = SubResource("CylinderMesh_88gup")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.31379, 0, -3.36634)
-mesh = SubResource("CylinderMesh_88gup")
-skeleton = NodePath("../..")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_bisa2")
@@ -43,8 +22,19 @@ camera_attributes = SubResource("CameraAttributesPractical_4o3f6")
 compositor = SubResource("Compositor_v5vuv")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_88gup")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.69557, 1.69789, 1.18713)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.59274, 1.69789, 0.829322)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.0205236, 0.999789, 0, -0.999789, -0.0205236, 0, 5.06522, 0)
+transform = Transform3D(0.419547, 0.725167, -0.545997, 0.165001, 0.53055, 0.831439, 0.892611, -0.438918, 0.102938, -0.77167, 3.46899, 1.72097)
 light_energy = 4.394
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+disable_mode = 1
+physics_material_override = SubResource("PhysicsMaterial_bisa2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.827148, 0.283137, -0.706474)
+shape = SubResource("BoxShape3D_bisa2")
+
+[node name="Kitchen_Environment" parent="." instance=ExtResource("2_bisa2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0, 1.015)
