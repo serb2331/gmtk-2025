@@ -12,6 +12,10 @@ func initialize_health():
 	
 func decrement_health():
 	health -= DECREMENT_VALUE
+	
+func start_game():
+	print("starting game")
+	get_tree().change_scene_to_file("res://room.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
