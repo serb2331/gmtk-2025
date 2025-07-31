@@ -1,8 +1,8 @@
 extends CharacterBody3D
 
 
-const SPEED = 5.0
-const FLY_VELOCITY = 5
+const SPEED = 0.5
+const FLY_VELOCITY = 0.5
 
 const ROTATION_MAX_DEGREE = 50
 
