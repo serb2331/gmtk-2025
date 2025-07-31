@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://browrbdltohk1"]
+
+[ext_resource type="PackedScene" uid="uid://bc231hgtwqj5r" path="res://player_fly.tscn" id="1_88gup"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_v321d"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_88gup"]
+size = Vector2(32, 32)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_88gup"]
+bottom_radius = 2.0
+height = 6.0
+
+[sub_resource type="Environment" id="Environment_bisa2"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_4o3f6"]
+
+[sub_resource type="Compositor" id="Compositor_v5vuv"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.139, 0.1, 0.254)
+shape = SubResource("WorldBoundaryShape3D_v321d")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("PlaneMesh_88gup")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.62758, 0, 0)
+mesh = SubResource("CylinderMesh_88gup")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.31379, 0, -3.36634)
+mesh = SubResource("CylinderMesh_88gup")
+skeleton = NodePath("../..")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bisa2")
+camera_attributes = SubResource("CameraAttributesPractical_4o3f6")
+compositor = SubResource("Compositor_v5vuv")
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("1_88gup")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.69557, 1.69789, 1.18713)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0205236, 0.999789, 0, -0.999789, -0.0205236, 0, 5.06522, 0)
+light_energy = 4.394
