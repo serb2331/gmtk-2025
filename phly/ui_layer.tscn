@@ -7,31 +7,23 @@ script/source = "extends ProgressBar
 @export var player_fly: CharacterBody3D
 
 const DECREMENT_INTERVAL = 1.0
-const DECREMENT_VALUE = 1.0
 var cooldown
-var health: int
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var starting_health_options := [100,50,80,120]
 	cooldown = 1.0
-	health = starting_health_options[randi() % starting_health_options.size()]
-	value = health
-	max_value = health
+	max_value = GameState.initialize_health()
 	pass # Replace with function body.
-
-
 
 func decrement_health_every_second(delta: float):
 	cooldown -= delta
 	if cooldown <= 0:
-		print(health)
-		health -= DECREMENT_VALUE
+		GameState.decrement_health()
 		cooldown = DECREMENT_INTERVAL
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	decrement_health_every_second(delta)
-	value = health
+	value = GameState.health
 		
 "
 
