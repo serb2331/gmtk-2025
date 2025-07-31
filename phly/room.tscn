@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://browrbdltohk1"]
+[gd_scene load_steps=8 format=3 uid="uid://hyvhfi6q4n8c"]
 
-[ext_resource type="PackedScene" uid="uid://bc231hgtwqj5r" path="res://player_fly.tscn" id="1_88gup"]
+[ext_resource type="PackedScene" uid="uid://cmhuo4csf1fj4" path="res://player_fly.tscn" id="1_88gup"]
 [ext_resource type="PackedScene" uid="uid://bdfj5t5yxlybb" path="res://assets/environment/Kitchen_Environment.fbx" id="2_bisa2"]
 
 [sub_resource type="Environment" id="Environment_bisa2"]
