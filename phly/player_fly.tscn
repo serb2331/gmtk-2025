@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bc231hgtwqj5r"]
+
+[ext_resource type="Script" uid="uid://cja4hhwtrelip" path="res://player_fly.gd" id="1_cowcd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6gpfs"]
+albedo_color = Color(1.49205e-06, 0.367314, 0.367672, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_6gpfs"]
+material = SubResource("StandardMaterial3D_6gpfs")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cowcd"]
+radius = 0.502413
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_cowcd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_6gpfs")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_cowcd")
+
+[node name="TwistPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="PitchPivot" type="Node3D" parent="TwistPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="TwistPivot/PitchPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
