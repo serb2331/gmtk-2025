@@ -1,0 +1,56 @@
+[gd_scene load_steps=10 format=3 uid="uid://browrbdltohk1"]
+
+[ext_resource type="Script" uid="uid://coo0j4chw3x46" path="res://room.gd" id="1_4o3f6"]
+[ext_resource type="PackedScene" uid="uid://cmhuo4csf1fj4" path="res://player_fly.tscn" id="1_88gup"]
+[ext_resource type="PackedScene" uid="uid://cfy70qk473650" path="res://kitchen_environment.tscn" id="2_bisa2"]
+[ext_resource type="PackedScene" uid="uid://b1msn131f82fi" path="res://food.tscn" id="3_4o3f6"]
+
+[sub_resource type="Environment" id="Environment_bisa2"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_4o3f6"]
+
+[sub_resource type="Compositor" id="Compositor_v5vuv"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bisa2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bisa2"]
+size = Vector3(10.625, 1, 14.6358)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_4o3f6")
+food_scene = ExtResource("3_4o3f6")
+
+[node name="CanvasLayer" parent="."]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+script = null
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bisa2")
+camera_attributes = SubResource("CameraAttributesPractical_4o3f6")
+compositor = SubResource("Compositor_v5vuv")
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("1_88gup")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.59274, 1.69789, 0.829322)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.419547, 0.725167, -0.545997, 0.165001, 0.53055, 0.831439, 0.892611, -0.438918, 0.102938, -0.77167, 3.46899, 1.72097)
+light_energy = 4.394
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+disable_mode = 1
+physics_material_override = SubResource("PhysicsMaterial_bisa2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.827148, 0.283137, -0.706474)
+shape = SubResource("BoxShape3D_bisa2")
+
+[node name="Kitchen_Environment2" parent="." instance=ExtResource("2_bisa2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0, 1.015)
