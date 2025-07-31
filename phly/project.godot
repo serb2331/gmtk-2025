@@ -11,9 +11,17 @@ config_version=5
 [application]
 
 config/name="Phly"
-run/main_scene="uid://browrbdltohk1"
+run/main_scene="uid://hyvhfi6q4n8c"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[debug]
+
+settings/stdout/print_fps=true
+
+[autoload]
+
+GameState="*res://scripts/game_state.gd"
 
 [input]
 

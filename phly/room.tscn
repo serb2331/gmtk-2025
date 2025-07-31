@@ -20,6 +20,8 @@ size = Vector3(10.625, 1, 14.6358)
 script = ExtResource("1_4o3f6")
 food_scene = ExtResource("3_4o3f6")
 
+[node name="CanvasLayer" parent="." instance=ExtResource("1_4o3f6")]
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_bisa2")
 camera_attributes = SubResource("CameraAttributesPractical_4o3f6")
