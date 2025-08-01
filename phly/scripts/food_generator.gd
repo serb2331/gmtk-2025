@@ -1,30 +1,30 @@
 extends Node
 
-const MIN_FOOD_DISTANCE = 0.2
+const MIN_FOOD_DISTANCE = 0.3
 
 const table1 = [
-		Vector3(-1.568, 0.943, 1.348),
-		Vector3(-1.568, 0.943, 0.732),
-		Vector3(-1.192, 0.943, 0.732),
-		Vector3(-1.192, 0.943, 1.348)
-	]
-const table2 = [
-	Vector3(-1.642, 0.943, 0.543),   
-	Vector3(-1.642, 0.943, -0.083),   
-	Vector3(-1.201, 0.943, -0.083),   
-	Vector3(-1.201, 0.943, 0.534),   
+    Vector3(-1.568, 0.843, 1.348),
+    Vector3(-1.568, 0.843, 0.732),
+    Vector3(-1.192, 0.843, 0.732),
+    Vector3(-1.192, 0.843, 1.348)
 ]
-const corner_table =  [
-	Vector3(-1.201, 0.949, -0.339),   
-	Vector3(-1.142, 0.949, -0.77),   
-	Vector3(-1.603, 0.949, -0.77),   
-	Vector3(-1.603, 0.949, -0.277),   
+const table2 = [
+    Vector3(-1.642, 0.843, 0.543),   
+    Vector3(-1.642, 0.843, -0.083),   
+    Vector3(-1.201, 0.843, -0.083),   
+    Vector3(-1.201, 0.843, 0.534),   
+]
+const corner_table = [
+    Vector3(-1.201, 0.849, -0.339),   
+    Vector3(-1.142, 0.849, -0.77),   
+    Vector3(-1.603, 0.849, -0.77),   
+    Vector3(-1.603, 0.849, -0.277),   
 ]
 const window_table = [
-	Vector3(-0.898, 0.957, -0.777),   
-	Vector3(-0.898, 0.957, -0.342),   
-	Vector3(-0.284, 0.957, -0.342),   
-	Vector3(-0.284, 0.957, -0.678),   
+    Vector3(-0.898, 0.857, -0.777),   
+    Vector3(-0.898, 0.857, -0.342),   
+    Vector3(-0.284, 0.857, -0.342),   
+    Vector3(-0.284, 0.857, -0.678),   
 ]
 const PLANES_TO_GENERATE_ON = [
 	table1,
@@ -34,6 +34,18 @@ const PLANES_TO_GENERATE_ON = [
 ]
 
 const FOOD_COUNT = 10
+
+func get_random_food() -> Node:
+	var food_scenes = [
+        load("res://assets/environment/food_items/SM_Apple.fbx"),
+        load("res://assets/environment/food_items/SM_Banana.fbx"),
+        load("res://assets/environment/food_items/SM_Bottle.fbx"),
+        load("res://assets/environment/food_items/SM_Bread.fbx"),
+        load("res://assets/environment/food_items/SM_Pizza.fbx"),
+        load("res://assets/environment/food_items/SM_Pot.fbx")
+    ]
+	var random_scene = food_scenes.pick_random()
+	return random_scene.instantiate()
 
 func random_point_on_plane(plane: Array) -> Vector3:
 	var u = randf()
@@ -65,6 +77,8 @@ func generate_food(parent: Node, food_scene: PackedScene):
 			var pos = random_point_on_plane(plane)
 			if is_position_free(pos, parent):
 				var food = food_scene.instantiate()
+				var food_type = get_random_food()
+				food.set_type(food_type)
 				food.global_transform.origin = pos
 				if food.has_method("set_size"):
 					food.set_size(randi_range(1, 5))
