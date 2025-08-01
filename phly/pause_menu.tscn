@@ -1,15 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://drxhrjk6ox23k"]
+[gd_scene load_steps=8 format=3 uid="uid://drxhrjk6ox23k"]
 
 [ext_resource type="FontFile" uid="uid://dbypm7vmyvbs7" path="res://fonts/ferrum.otf" id="1_hdmo1"]
 [ext_resource type="Script" uid="uid://bigra2o72flyr" path="res://pause_menu.gd" id="1_nwcfo"]
+[ext_resource type="Texture2D" uid="uid://cein560g8c5jq" path="res://assets/player/textures/M_Wings_Roughness.jpg" id="2_05uyy"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nwcfo"]
-bg_color = Color(0.768883, 0.535827, 0.456124, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.441823, 0.167715, 0.108039, 1)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p81d2"]
+texture = ExtResource("2_05uyy")
 
 [sub_resource type="Animation" id="Animation_05uyy"]
 length = 0.001
@@ -138,7 +134,7 @@ offset_right = 169.5
 offset_bottom = 147.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_nwcfo")
+theme_override_styles/panel = SubResource("StyleBoxTexture_p81d2")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel"]
 layout_mode = 1

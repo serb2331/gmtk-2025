@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://biqsk1bdq8k80" path="res://main_menu.gd" id="1_06t4h"]
 [ext_resource type="FontFile" uid="uid://dbypm7vmyvbs7" path="res://fonts/ferrum.otf" id="2_7vrkn"]
-[ext_resource type="Texture2D" uid="uid://ca5ndv2dab4de" path="res://assets/images/background-game1.jpg" id="2_fu7sn"]
+[ext_resource type="Texture2D" uid="uid://bga5pmspuulh8" path="res://assets/images/background-game1.png" id="2_fu7sn"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jix8l"]
 texture = ExtResource("2_fu7sn")
-modulate_color = Color(0.226707, 0.226707, 0.226707, 1)
+modulate_color = Color(0.741385, 0.741385, 0.741385, 0.635294)
 
 [sub_resource type="InputEventKey" id="InputEventKey_7vrkn"]
 device = -1
