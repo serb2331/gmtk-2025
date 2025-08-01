@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://nb1y8kyv4io0"]
+
+[ext_resource type="Texture2D" uid="uid://86bi6s62vtty" path="res://assets/player/textures/M_Wings_BaseColor.png" id="1_ixhcx"]
+[ext_resource type="Texture2D" uid="uid://cein560g8c5jq" path="res://assets/player/textures/M_Wings_Roughness.jpg" id="2_iulci"]
+
+[resource]
+transparency = 1
+cull_mode = 2
+albedo_texture = ExtResource("1_ixhcx")
+roughness_texture = ExtResource("2_iulci")
+roughness_texture_channel = 3

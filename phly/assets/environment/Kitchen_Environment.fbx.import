@@ -32,7 +32,22 @@ animation/trimming=true
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
-_subresources={}
+_subresources={
+"materials": {
+"M_AssetPack_01": {
+"use_external/enabled": true,
+"use_external/path": "uid://rto3nk10ahqj"
+},
+"M_AssetPack_02": {
+"use_external/enabled": true,
+"use_external/path": "uid://btfneqhlybgxp"
+},
+"M_Walls_Floor": {
+"use_external/enabled": true,
+"use_external/path": "uid://c6b21j5vxye7h"
+}
+}
+}
 fbx/importer=0
 fbx/allow_geometry_helper_nodes=false
 fbx/embedded_image_handling=1

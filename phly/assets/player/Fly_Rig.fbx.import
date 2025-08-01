@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://d3m6o5mr2a6wd"
+uid="uid://cre6n543xhx4"
 path="res://.godot/imported/Fly_Rig.fbx-e03b72f9048a113c5316dbf5cc0a32ff.scn"
 
 [deps]
@@ -32,7 +32,18 @@ animation/trimming=true
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
-_subresources={}
+_subresources={
+"materials": {
+"M_Fly": {
+"use_external/enabled": true,
+"use_external/path": "uid://c2e8efe7es81h"
+},
+"M_Wings": {
+"use_external/enabled": true,
+"use_external/path": "uid://nb1y8kyv4io0"
+}
+}
+}
 fbx/importer=0
 fbx/allow_geometry_helper_nodes=false
 fbx/embedded_image_handling=1
