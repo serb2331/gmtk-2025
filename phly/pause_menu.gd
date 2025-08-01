@@ -2,6 +2,7 @@ extends Control
 
 
 func resume():
+	print("here.............")
 	get_tree().paused = false
 	$AnimationPlayer.play_backwards("blur")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -31,11 +32,15 @@ func _process(delta: float) -> void:
 
 func _on_resume_button_pressed() -> void:
 	resume()
+	$Panel/MarginContainer/VBoxContainer/ResumeButton.release_focus()
 
 
 func _on_restart_button_pressed() -> void:
+	get_tree().paused = false
+	$Panel/MarginContainer/VBoxContainer/ResumeButton.release_focus()
 	get_tree().reload_current_scene()
 
 
 func _on_quit_button_pressed() -> void:
+	get_tree().paused = false
 	get_tree().change_scene_to_file("res://main_menu.tscn")
