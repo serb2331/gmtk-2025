@@ -2,12 +2,12 @@ extends CharacterBody3D
 
 # i guess use m/s for speed and such(?)
 
-const SPEED = 250.0
-const FLY_VELOCITY = 5
+const SPEED = 25
+const FLY_VELOCITY = 0.2
 
 const ROTATION_MAX_DEGREE = 50
 
-const GRAVITY_MULTIPLIER_WHEN_FLYING = 0.2
+const GRAVITY_MULTIPLIER_WHEN_FLYING = 0.02
 var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity") *  GRAVITY_MULTIPLIER_WHEN_FLYING
 
 @onready var TwistPivot : Node3D = $TwistPivot
@@ -81,8 +81,12 @@ func _physics_process(delta: float) -> void:
 		velocity.z = _direction.z * SPEED * delta
 		velocity.y -= GRAVITY * delta
 	else:
-		velocity.x = lerp(velocity.x, 0.0, DECELERATION * delta)
-		velocity.z = lerp(velocity.z, 0.0, DECELERATION * delta)
+		if is_on_floor():
+			velocity.x = 0.0
+			velocity.z = 0.0
+		else:
+			velocity.x = lerp(velocity.x, 0.0, DECELERATION * delta)
+			velocity.z = lerp(velocity.z, 0.0, DECELERATION * delta)
 
 	move_and_slide()
 
