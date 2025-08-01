@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://browrbdltohk1"]
+[gd_scene load_steps=11 format=3 uid="uid://browrbdltohk1"]
 
 [ext_resource type="Script" uid="uid://coo0j4chw3x46" path="res://room.gd" id="1_4o3f6"]
 [ext_resource type="PackedScene" uid="uid://cmhuo4csf1fj4" path="res://player_fly.tscn" id="1_88gup"]
 [ext_resource type="PackedScene" uid="uid://cfy70qk473650" path="res://kitchen_environment.tscn" id="2_bisa2"]
 [ext_resource type="PackedScene" uid="uid://b1msn131f82fi" path="res://food.tscn" id="3_4o3f6"]
+[ext_resource type="PackedScene" uid="uid://dcsdewssu0eov" path="res://ui_layer.tscn" id="5_ka7wq"]
 
 [sub_resource type="Environment" id="Environment_bisa2"]
 
@@ -42,3 +43,5 @@ shape = SubResource("BoxShape3D_bisa2")
 
 [node name="Kitchen_Environment2" parent="." instance=ExtResource("2_bisa2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0, 1.015)
+
+[node name="CanvasLayer" parent="." instance=ExtResource("5_ka7wq")]
