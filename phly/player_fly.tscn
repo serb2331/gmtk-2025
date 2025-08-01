@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmhuo4csf1fj4"]
+[gd_scene load_steps=4 format=3 uid="uid://cmhuo4csf1fj4"]
 
 [ext_resource type="Script" uid="uid://cja4hhwtrelip" path="res://player_fly.gd" id="1_cowcd"]
-[ext_resource type="PackedScene" uid="uid://d3m6o5mr2a6wd" path="res://assets/player/Fly_Rig.fbx" id="2_ybtsn"]
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ybtsn"]
+[ext_resource type="PackedScene" uid="uid://de1h3gx4jutl8" path="res://assets/player/fly_scene.tscn" id="2_ybtsn"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cowcd"]
 radius = 0.01
@@ -13,11 +11,6 @@ script = ExtResource("1_cowcd")
 
 [node name="Fly" parent="." instance=ExtResource("2_ybtsn")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
-
-[node name="AnimationPlayer2" type="AnimationPlayer" parent="Fly"]
-libraries = {
-&"": SubResource("AnimationLibrary_ybtsn")
-}
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0.015, 0)

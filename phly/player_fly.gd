@@ -14,6 +14,7 @@ var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity") *  GRAVI
 @onready var PitchPivot : Node3D = $TwistPivot/PitchPivot
 @onready var Camera := $TwistPivot/PitchPivot/Camera3D
 @onready var Model : Node3D = $Fly
+@onready var FlyAnimation : AnimationPlayer = $Fly/AnimationPlayer
 const ROTATION_SPEED = 90.0  # degrees per second
 const MIN_PITCH = deg_to_rad(-(ROTATION_MAX_DEGREE))
 const MAX_PITCH = deg_to_rad(ROTATION_MAX_DEGREE)
@@ -55,6 +56,7 @@ func _rotateModel() -> void:
 #############
 
 func _ready() -> void:
+	print("FlyAnimation: ", FlyAnimation)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _physics_process(delta: float) -> void:
@@ -89,6 +91,22 @@ func _physics_process(delta: float) -> void:
 			velocity.z = lerp(velocity.z, 0.0, DECELERATION * delta)
 
 	move_and_slide()
+
+	var desired_animation := ""
+
+	if velocity.y != 0:
+		desired_animation = "fly"
+	elif is_on_floor():
+		var is_moving = abs(velocity.x) > 0.1 or abs(velocity.z) > 0.1
+		if is_moving:
+			desired_animation = "walk"
+		else:
+			desired_animation = "idle"
+	else:
+		desired_animation = "idle" 
+
+	if FlyAnimation.current_animation != desired_animation:
+		FlyAnimation.play(desired_animation)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion):
