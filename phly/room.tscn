@@ -20,18 +20,6 @@ size = Vector3(10.625, 1, 14.6358)
 script = ExtResource("1_4o3f6")
 food_scene = ExtResource("3_4o3f6")
 
-[node name="CanvasLayer" parent="."]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-script = null
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_bisa2")
 camera_attributes = SubResource("CameraAttributesPractical_4o3f6")
