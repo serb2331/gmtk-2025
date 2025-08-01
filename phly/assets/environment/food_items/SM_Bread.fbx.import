@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c4uibx5hn6xoa"
-path="res://.godot/imported/Fly.fbx-2997ccf08c220ca740683f357dfd305d.scn"
+uid="uid://evhymmglq30g"
+path="res://.godot/imported/SM_Bread.fbx-6574fee0ee150edb724cb16da0a742b7.scn"
 
 [deps]
 
-source_file="res://Fly.fbx"
-dest_files=["res://.godot/imported/Fly.fbx-2997ccf08c220ca740683f357dfd305d.scn"]
+source_file="res://assets/environment/food_items/SM_Bread.fbx"
+dest_files=["res://.godot/imported/SM_Bread.fbx-6574fee0ee150edb724cb16da0a742b7.scn"]
 
 [params]
 
