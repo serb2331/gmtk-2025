@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1msn131f82fi"]
+[gd_scene load_steps=5 format=3 uid="uid://b1msn131f82fi"]
 
 [ext_resource type="Script" uid="uid://bwbfshijqv54t" path="res://food.gd" id="1_8txok"]
 
@@ -10,8 +10,6 @@ albedo_color = Color(1.49205e-06, 0.367314, 0.367672, 1)
 [sub_resource type="SphereMesh" id="SphereMesh_4x0hx"]
 material = SubResource("StandardMaterial3D_6gpfs")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_4x0hx"]
-
 [node name="Food" type="Node3D"]
 script = ExtResource("1_8txok")
 
@@ -20,14 +18,8 @@ script = ExtResource("1_8txok")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_8txok")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="FoodMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 mesh = SubResource("SphereMesh_4x0hx")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
-shape = SubResource("SphereShape3D_4x0hx")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
