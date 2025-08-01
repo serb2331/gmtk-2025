@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dcsdewssu0eov"]
+[gd_scene load_steps=3 format=3 uid="uid://dcsdewssu0eov"]
+
+[ext_resource type="PackedScene" uid="uid://drxhrjk6ox23k" path="res://pause_menu.tscn" id="1_pxq32"]
 
 [sub_resource type="GDScript" id="GDScript_mow34"]
 resource_name = "life_bar"
@@ -40,3 +42,5 @@ offset_bottom = 45.0
 grow_horizontal = 0
 show_percentage = false
 script = SubResource("GDScript_mow34")
+
+[node name="PauseMenu" parent="." instance=ExtResource("1_pxq32")]
