@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://sggjfsxhpfgq"]
+[gd_scene load_steps=7 format=3 uid="uid://sggjfsxhpfgq"]
 
 [ext_resource type="Script" uid="uid://cja4hhwtrelip" path="res://scripts/player_fly.gd" id="1_cowcd"]
 [ext_resource type="PackedScene" uid="uid://de1h3gx4jutl8" path="res://assets/player/fly_scene.tscn" id="2_ybtsn"]
@@ -7,6 +7,10 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ybtsn"]
 size = Vector3(0.001, 0.0110449, 0.0156421)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7lsi5"]
+radius = 0.02
+height = 0.07
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_cowcd")
@@ -36,3 +40,11 @@ volume_db = -6.0
 [node name="WalkingSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_walking")
 volume_db = -2.0
+
+[node name="KillArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KillArea"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.0193183, -0.00464746)
+shape = SubResource("CapsuleShape3D_7lsi5")
+
+[connection signal="body_entered" from="KillArea" to="." method="_on_kill_area_body_entered"]

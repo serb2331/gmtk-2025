@@ -19,6 +19,7 @@ size = Vector3(10.625, 1, 14.6358)
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_4o3f6")
 food_scene = ExtResource("3_4o3f6")
+spider_scene = ExtResource("8_42v8c")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("3_01y1d")
@@ -38,7 +39,7 @@ light_volumetric_fog_energy = 1.8
 spot_angle = 55.0788
 
 [node name="Player" parent="." instance=ExtResource("1_88gup")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.59274, 1.69789, 0.829322)
+transform = Transform3D(0.424168, 0, -0.905584, 0, 1, 0, 0.905584, 0, 0.424168, -0.59274, 0.584046, -0.414003)
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 disable_mode = 1
@@ -56,15 +57,6 @@ shape = SubResource("BoxShape3D_bisa2")
 stream = ExtResource("6_x5k2b")
 volume_db = -12.0
 autoplay = true
-
-[node name="Spider2" parent="." instance=ExtResource("8_42v8c")]
-transform = Transform3D(-0.583881, 0, -0.811839, 0, 1, 0, 0.811839, 0, -0.583881, 0.381416, 0.906804, 1.7116)
-
-[node name="Spider3" parent="." instance=ExtResource("8_42v8c")]
-transform = Transform3D(0.823879, 0, 0.566766, 0, 1, 0, -0.566766, 0, 0.823879, -1.25167, 0.0799629, -0.967638)
-
-[node name="Spider" parent="." instance=ExtResource("8_42v8c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.871933, 0.809846, -0.304783)
 
 [node name="Envi_Clutter" parent="." instance=ExtResource("9_ybpoa")]
 

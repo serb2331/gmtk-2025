@@ -41,6 +41,7 @@ func _on_resume_button_pressed() -> void:
 
 func _on_restart_button_pressed() -> void:
 	get_tree().paused = false
+	GameState.is_caught_in_web = false
 	$Panel/MarginContainer/VBoxContainer/ResumeButton.release_focus()
 	get_tree().reload_current_scene()
 

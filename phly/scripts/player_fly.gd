@@ -182,3 +182,9 @@ func _process(delta):
 func _on_eat_pressed(delta: float):
 	print("eat")
 	GameState.food += 10 * delta
+
+
+func _on_kill_area_body_entered(body: Node3D) -> void:
+	if body.is_in_group("enemies"):
+		print("killed by spider!")
+		GameState.handle_death()
