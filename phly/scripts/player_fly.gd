@@ -131,8 +131,11 @@ func _physics_process(delta: float) -> void:
 		else:
 			WalkingSound.stop()
 
+
 func _unhandled_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion):
+		# print(event.screen_relative)
+
 		# rotate camera
 		var _yaw := 0.0
 		var _pitch := 0.0
@@ -140,14 +143,33 @@ func _unhandled_input(event: InputEvent) -> void:
 		_yaw = -event.screen_relative.x * CAMERA_SENSITIVITY
 		_pitch = -event.screen_relative.y * CAMERA_SENSITIVITY
 
+		print(_yaw, " ---- ", _pitch);
+
 		# TwistPivot.rotate_y(_yaw);
 		# PitchPivot.rotate_x(_pitch);
 
 		_target_camera_yaw += _yaw;
 		if not is_on_floor():
-				_target_camera_pitch += _pitch
+			_target_camera_pitch += _pitch
 		else:
-				_target_camera_pitch = deg_to_rad(-15)
+			_target_camera_pitch = deg_to_rad(-15)
+
+func _process(delta):
+	var right_stick_x = Input.get_joy_axis(0, JOY_AXIS_RIGHT_X)
+	var right_stick_y = Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
+	
+	if abs(right_stick_x) > 0.1 or abs(right_stick_y) > 0.1:
+		var _yaw = -right_stick_x * CAMERA_SENSITIVITY * 200 * delta
+		var _pitch = -right_stick_y * CAMERA_SENSITIVITY * 200 * delta
+		
+		_target_camera_yaw += _yaw
+		if not is_on_floor():
+			_target_camera_pitch += _pitch
+		else:
+			_target_camera_pitch = deg_to_rad(-15)
+	
+	if is_on_floor() and _target_camera_pitch != deg_to_rad(-15):
+		_target_camera_pitch = deg_to_rad(-15)
 
 func _on_eat_pressed(delta: float):
 	print("eat")
