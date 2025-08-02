@@ -44,11 +44,18 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 24
 
-[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+[node name="Label2" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_r6qnx")
 theme_override_font_sizes/font_size = 64
 text = "You Died"
+horizontal_alignment = 1
+
+[node name="GenerationsLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_r6qnx")
+theme_override_font_sizes/font_size = 40
+text = "Number of generations: 1"
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]

@@ -72,6 +72,7 @@ func handle_death():
 		initialize_food()
 		player.global_position = respawn_location
 		is_dying = false
+		is_caught_in_web = false
 	else:
 		if death_sound:
 			death_sound.play()

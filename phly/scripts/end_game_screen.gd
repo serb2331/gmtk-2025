@@ -1,9 +1,10 @@
 extends Control
 
 
+@onready var generations_label = $Panel/VBoxContainer/GenerationsLabel
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	generations_label.text = "Number of generations: "+ str(GameState.number_of_generations_survived)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
