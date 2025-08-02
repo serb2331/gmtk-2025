@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bwbfshijqv54t" path="res://scripts/food.gd" id="1_8txok"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8txok"]
+radius = 0.274365
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6gpfs"]
 albedo_color = Color(1.49205e-06, 0.367314, 0.367672, 1)
@@ -10,8 +11,9 @@ albedo_color = Color(1.49205e-06, 0.367314, 0.367672, 1)
 [sub_resource type="SphereMesh" id="SphereMesh_4x0hx"]
 material = SubResource("StandardMaterial3D_6gpfs")
 
-[node name="Food" type="Node3D"]
+[node name="Food" type="Node3D" node_paths=PackedStringArray("area_shape")]
 script = ExtResource("1_8txok")
+area_shape = NodePath("Area3D/CollisionShape3D")
 
 [node name="Area3D" type="Area3D" parent="."]
 

@@ -129,6 +129,10 @@ func _physics_process(delta: float) -> void:
 	if playback.get_current_node() != desired_animation:
 		playback.travel(desired_animation)
 
+			
+	if GameState.inside_food:
+		if Input.is_action_pressed("eat"):
+			_on_eat_pressed(delta)
 	if velocity.y != 0:
 		if not FlyingSound.playing:
 			FlyingSound.play()
@@ -162,3 +166,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				_target_camera_pitch += _pitch
 		else:
 				_target_camera_pitch = deg_to_rad(-15)
+
+func _on_eat_pressed(delta: float):
+	print("eat")
+	GameState.food += 10 * delta

@@ -11,10 +11,8 @@ animation_player = NodePath("AnimationPlayer")
 animation_tree = NodePath("AnimationTree")
 
 [node name="Skeleton3D" parent="." index="0"]
-bones/26/rotation = Quaternion(0.884921, 0.465704, -0.00442768, -0.00381865)
-bones/28/rotation = Quaternion(0.977769, -0.209684, 7.21535e-17, -4.71511e-17)
-bones/30/rotation = Quaternion(0.816114, 0.384041, 0.382088, 0.201194)
-bones/32/rotation = Quaternion(0.954129, -0.299396, 4.48151e-17, -5.01136e-17)
+bones/28/rotation = Quaternion(0.977769, -0.209684, -2.30087e-18, -1.27296e-16)
+bones/32/rotation = Quaternion(0.954129, -0.299396, -9.45424e-17, -3.34535e-16)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Skeleton3D/SK_Fly" index="0"]
 
