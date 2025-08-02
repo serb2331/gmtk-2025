@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bdyps5s3hxgfc" path="res://assets/environment/textures/M_Walls_Floor_BaseColor.jpg" id="1_ld58t"]
 [ext_resource type="Texture2D" uid="uid://cie5tqmtw01w2" path="res://assets/environment/textures/M_Walls_Floor_Metalness.jpg" id="2_1coc1"]
-[ext_resource type="Texture2D" uid="uid://di00lrfv7ptsq" path="res://assets/environment/textures/M_AssetPack_02_Roughness.jpg" id="3_fk7sc"]
+[ext_resource type="Texture2D" uid="uid://c5rw8n4xptlaq" path="res://assets/environment/textures/M_Walls_Floor_Roughness.jpg" id="3_ld58t"]
 
 [resource]
 cull_mode = 2
@@ -10,5 +10,4 @@ albedo_texture = ExtResource("1_ld58t")
 metallic = 1.0
 metallic_texture = ExtResource("2_1coc1")
 metallic_texture_channel = 3
-roughness_texture = ExtResource("3_fk7sc")
-roughness_texture_channel = 3
+roughness_texture = ExtResource("3_ld58t")

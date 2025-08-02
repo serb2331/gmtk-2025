@@ -11,6 +11,5 @@ metallic = 1.0
 metallic_texture = ExtResource("2_brwgk")
 metallic_texture_channel = 3
 roughness_texture = ExtResource("4_u2wnl")
-roughness_texture_channel = 3
 normal_enabled = true
 normal_texture = ExtResource("3_u2wnl")
