@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dlvwdklf5gng4"]
+[gd_scene load_steps=4 format=3 uid="uid://bo5j04m650c51"]
 
-[ext_resource type="Script" uid="uid://b14iepqtc4kh6" path="res://scenes/spider_web.gd" id="1_4jtdv"]
+[ext_resource type="Script" path="res://scenes/spider_web.gd" id="1_4jtdv"]
 [ext_resource type="PackedScene" uid="uid://crr0hfg6gn6aj" path="res://assets/enemies/Web.fbx" id="1_dxjea"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dxjea"]
