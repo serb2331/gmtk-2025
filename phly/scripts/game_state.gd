@@ -2,18 +2,25 @@ extends Node
 
 var health: int
 var score: int
-var food: int
-var death_sound: AudioStreamPlayer
+var food: float
+var inside_food: bool
+
 const DECREMENT_VALUE = 1.0
 const STARTING_FOOD = 0
-const starting_health_options := [10,5,8,12 ]
+const starting_health_options := [100,50,80,120]
+const starting_food_options := [0,20,0,5,15]
 const MIN_HEALTH = 0
 const has_descendant = false
+var death_sound: AudioStreamPlayer
 
 func initialize_health():
 	health = starting_health_options[randi() % starting_health_options.size()]
 	return health
 	
+func initialize_food():
+	food = starting_food_options[randi() % starting_food_options.size()]
+	return food
+
 func decrement_health():
 	health -= DECREMENT_VALUE
 	if health <= MIN_HEALTH:
