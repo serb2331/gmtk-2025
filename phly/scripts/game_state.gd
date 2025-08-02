@@ -6,7 +6,7 @@ var food: int
 var death_sound: AudioStreamPlayer
 const DECREMENT_VALUE = 1.0
 const STARTING_FOOD = 0
-const starting_health_options := [100,50,80,120]
+const starting_health_options := [10,5,8,12 ]
 const MIN_HEALTH = 0
 const has_descendant = false
 
@@ -24,7 +24,7 @@ func decrement_health():
 	
 func start_game():
 	print("starting game")
-	get_tree().change_scene_to_file("res://room.tscn")
+	get_tree().change_scene_to_file("res://scenes/room.tscn")
 	
 func handle_death():
 	if death_sound:
