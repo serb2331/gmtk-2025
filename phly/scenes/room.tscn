@@ -1,13 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://cqpyc2x2lbjmb"]
+[gd_scene load_steps=12 format=3 uid="uid://browrbdltohk1"]
 
-[ext_resource type="Script" uid="uid://coo0j4chw3x46" path="res://room.gd" id="1_4o3f6"]
-[ext_resource type="PackedScene" uid="uid://sggjfsxhpfgq" path="res://player_fly.tscn" id="1_88gup"]
-[ext_resource type="PackedScene" uid="uid://cfy70qk473650" path="res://kitchen_environment.tscn" id="2_bisa2"]
+[ext_resource type="Script" uid="uid://coo0j4chw3x46" path="res://scripts/room.gd" id="1_4o3f6"]
+[ext_resource type="PackedScene" uid="uid://sggjfsxhpfgq" path="res://scenes/player_fly.tscn" id="1_88gup"]
+[ext_resource type="PackedScene" uid="uid://cfy70qk473650" path="res://scenes/kitchen_environment.tscn" id="2_bisa2"]
 [ext_resource type="Environment" uid="uid://dgohufk4uumqy" path="res://scene/WorldEnvironment.tres" id="3_01y1d"]
-[ext_resource type="PackedScene" uid="uid://b1msn131f82fi" path="res://food.tscn" id="3_4o3f6"]
-[ext_resource type="PackedScene" uid="uid://dcsdewssu0eov" path="res://ui_layer.tscn" id="5_ka7wq"]
+[ext_resource type="PackedScene" uid="uid://b1msn131f82fi" path="res://scenes/food.tscn" id="3_4o3f6"]
+[ext_resource type="PackedScene" uid="uid://dcsdewssu0eov" path="res://scenes/ui_layer.tscn" id="5_ka7wq"]
 [ext_resource type="AudioStream" uid="uid://dsullup1dunb0" path="res://assets/music/ambient1.wav" id="6_x5k2b"]
 [ext_resource type="PackedScene" uid="uid://dhoptd3tntbth" path="res://assets/environment/Envi_Clutter.fbx" id="7_8cv3p"]
+[ext_resource type="PackedScene" uid="uid://bl65pjc431inu" path="res://scenes/spider.tscn" id="8_42v8c"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bisa2"]
 
@@ -35,17 +36,15 @@ light_energy = 6.062
 light_volumetric_fog_energy = 1.8
 spot_angle = 55.0788
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("1_88gup")]
+[node name="Player" parent="." instance=ExtResource("1_88gup")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.59274, 1.69789, 0.829322)
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
-visible = false
 disable_mode = 1
 physics_material_override = SubResource("PhysicsMaterial_bisa2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.827148, 0.283137, -0.706474)
-visible = false
 shape = SubResource("BoxShape3D_bisa2")
 
 [node name="Kitchen_Environment2" parent="." instance=ExtResource("2_bisa2")]
@@ -55,8 +54,10 @@ visible = false
 
 [node name="MusicPlayer" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.63837)
-visible = false
 stream = ExtResource("6_x5k2b")
 autoplay = true
+
+[node name="Spider" parent="." instance=ExtResource("8_42v8c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.871933, 0.809846, -0.304783)
 
 [node name="Envi_Clutter" parent="." instance=ExtResource("7_8cv3p")]
