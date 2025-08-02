@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://de1h3gx4jutl8"]
 
-[ext_resource type="PackedScene" uid="uid://d3m6o5mr2a6wd" path="res://assets/player/Fly_Rig.fbx" id="1_02v15"]
+[ext_resource type="PackedScene" uid="uid://cre6n543xhx4" path="res://assets/player/Fly_Rig.fbx" id="1_02v15"]
 [ext_resource type="Script" uid="uid://cfeuuubukj432" path="res://assets/player/fly_behaivor.gd" id="2_hepls"]
 
 [node name="Fly_Rig" node_paths=PackedStringArray("animation_player") instance=ExtResource("1_02v15")]

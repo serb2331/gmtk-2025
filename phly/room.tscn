@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=3 uid="uid://cqpyc2x2lbjmb"]
 
-[ext_resource type="Script" path="res://room.gd" id="1_4o3f6"]
+[ext_resource type="Script" uid="uid://coo0j4chw3x46" path="res://room.gd" id="1_4o3f6"]
 [ext_resource type="PackedScene" uid="uid://sggjfsxhpfgq" path="res://player_fly.tscn" id="1_88gup"]
-[ext_resource type="PackedScene" path="res://kitchen_environment.tscn" id="2_bisa2"]
+[ext_resource type="PackedScene" uid="uid://cfy70qk473650" path="res://kitchen_environment.tscn" id="2_bisa2"]
 [ext_resource type="Environment" uid="uid://dgohufk4uumqy" path="res://scene/WorldEnvironment.tres" id="3_01y1d"]
 [ext_resource type="PackedScene" uid="uid://b1msn131f82fi" path="res://food.tscn" id="3_4o3f6"]
-[ext_resource type="PackedScene" path="res://ui_layer.tscn" id="5_ka7wq"]
+[ext_resource type="PackedScene" uid="uid://dcsdewssu0eov" path="res://ui_layer.tscn" id="5_ka7wq"]
 [ext_resource type="AudioStream" uid="uid://dsullup1dunb0" path="res://assets/music/ambient1.wav" id="6_x5k2b"]
 [ext_resource type="PackedScene" uid="uid://dhoptd3tntbth" path="res://assets/environment/Envi_Clutter.fbx" id="7_8cv3p"]
 
