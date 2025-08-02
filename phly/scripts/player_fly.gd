@@ -16,6 +16,9 @@ var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity") *  GRAVI
 @onready var Model : Node3D = $Fly
 @onready var animation_tree: AnimationTree = $Fly/AnimationTree
 const ROTATION_SPEED = 90.0  
+@onready var FlyAnimation : AnimationPlayer = $Fly/AnimationPlayer
+@onready var FlyingSound : AudioStreamPlayer = $FlyingSound
+const ROTATION_SPEED = 90.0  # degrees per second
 const MIN_PITCH = deg_to_rad(-(ROTATION_MAX_DEGREE))
 const MAX_PITCH = deg_to_rad(ROTATION_MAX_DEGREE)
 const DECELERATION = 5
@@ -125,6 +128,12 @@ func _physics_process(delta: float) -> void:
 	var playback = animation_tree.get("parameters/playback")
 	if playback.get_current_node() != desired_animation:
 		playback.travel(desired_animation)
+
+	if velocity.y != 0:
+		if not FlyingSound.playing:
+			FlyingSound.play()
+	else:
+		FlyingSound.stop()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion):
