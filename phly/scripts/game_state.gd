@@ -1,5 +1,7 @@
 extends Node
 
+signal respawned
+
 var player: CharacterBody3D
 var health: int
 var score: int
@@ -11,7 +13,7 @@ var is_respawning: bool
 var is_dying: bool
 var respawn_location: Vector3
 var is_caught_in_web: bool
-
+var number_of_generations_survived: int
 
 
 const DECREMENT_VALUE = 3.0
@@ -43,7 +45,9 @@ func set_respawn(location):
 		await get_tree().create_timer(2.0).timeout
 		respawn_location = location
 		can_respawn = true
+		number_of_generations_survived += 1
 		is_respawning = false
+		emit_signal("respawned")
 
 func decrement_health():
 	health -= DECREMENT_VALUE
@@ -52,6 +56,7 @@ func decrement_health():
 	
 func start_game():
 	print("starting game")
+	number_of_generations_survived = 1
 	is_caught_in_web = false
 	get_tree().change_scene_to_file("res://scenes/room.tscn")
 	
