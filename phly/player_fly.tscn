@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://cja4hhwtrelip" path="res://player_fly.gd" id="1_cowcd"]
 [ext_resource type="PackedScene" uid="uid://de1h3gx4jutl8" path="res://assets/player/fly_scene.tscn" id="2_ybtsn"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_cowcd"]
-radius = 0.01
+[sub_resource type="BoxShape3D" id="BoxShape3D_ybtsn"]
+size = Vector3(0.001, 0.0110449, 0.0156421)
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_cowcd")
@@ -13,8 +13,8 @@ script = ExtResource("1_cowcd")
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0.015, 0)
-shape = SubResource("SphereShape3D_cowcd")
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0.000636049, 0.017937, -0.00723571)
+shape = SubResource("BoxShape3D_ybtsn")
 
 [node name="TwistPivot" type="Node3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
