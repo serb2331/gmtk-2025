@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bj4o4dx0g56e2"]
+
+[ext_resource type="Texture2D" uid="uid://7betso2w2chx" path="res://assets/enemies/textures/M_Spider_BaseColor.jpg" id="1_7h8kx"]
+[ext_resource type="Texture2D" uid="uid://ypqjbrvwg6oi" path="res://assets/enemies/textures/M_Spider_Roughness.jpg" id="2_g64sj"]
+
+[resource]
+albedo_texture = ExtResource("1_7h8kx")
+roughness_texture = ExtResource("2_g64sj")
