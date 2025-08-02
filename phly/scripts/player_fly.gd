@@ -8,7 +8,9 @@ const FLY_VELOCITY = 0.2
 const ROTATION_MAX_DEGREE = 50	
 
 const GRAVITY_MULTIPLIER_WHEN_FLYING = 0.02
-var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity") *  GRAVITY_MULTIPLIER_WHEN_FLYING
+const ACCELERATION = 8
+const MAX_SPEED = 1
+var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @onready var TwistPivot : Node3D = $TwistPivot
 @onready var PitchPivot : Node3D = $TwistPivot/PitchPivot
@@ -21,34 +23,12 @@ const ROTATION_SPEED = 90.0
 @onready var WalkingSound : AudioStreamPlayer = $WalkingSound
 const MIN_PITCH = deg_to_rad(-(ROTATION_MAX_DEGREE))
 const MAX_PITCH = deg_to_rad(ROTATION_MAX_DEGREE)
-const DECELERATION = 5
 const CAMERA_SENSITIVITY = 0.01
-
-# func rotate_camera(delta: float):
-# 	var _yaw = 0.0
-# 	var _pitch = 0.0
-
-# 	if Input.is_action_pressed("rotate_left"):
-# 		_yaw += ROTATION_SPEED * delta
-# 	if Input.is_action_pressed("rotate_right"):
-# 		_yaw -= ROTATION_SPEED * delta
-# 	if Input.is_action_pressed("rotate_up"):
-# 		_pitch += ROTATION_SPEED * delta
-# 	if Input.is_action_pressed("rotate_down"):
-# 		_pitch -= ROTATION_SPEED * delta
-# 	# Rotate this node (TwistPivot) around Y
-# 	TwistPivot.rotate_y(deg_to_rad(_yaw))
-
-# 	# Rotate PitchPivot around X, with clamping
-# 	var current_pitch = PitchPivot.rotation.x
-# 	current_pitch = current_pitch + deg_to_rad(_pitch)
-# 	current_pitch = clamp(current_pitch, MIN_PITCH, MAX_PITCH)
-# 	PitchPivot.rotation.x = current_pitch\
+const YAW_THRESHOLD = deg_to_rad(0.5)
 
 var _target_camera_yaw := deg_to_rad(180)
 var _target_camera_pitch := deg_to_rad(-45)
 var _last_camera_yaw := 0.0
-
 
 func _rotateCamera() -> void:
 	TwistPivot.rotation.y = lerp_angle(TwistPivot.rotation.y, _target_camera_yaw, 0.1);
@@ -58,54 +38,43 @@ func _rotateModel() -> void:
 	Model.rotation.x = -PitchPivot.rotation.x;
 	Model.rotation.y = TwistPivot.rotation.y - PI;
 
-#############
+func _handleMovement(delta) -> void:
 
-func _ready() -> void:
-	_last_camera_yaw = _target_camera_yaw
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	var _is_moving := false;
+	var _move_direction := Vector3.ZERO;	
 
-func _physics_process(delta: float) -> void:
-	_rotateCamera()
-	_rotateModel()
-	if is_on_floor():
-		_target_camera_pitch = deg_to_rad(-15)
+	# Move forward (W) — horizontal plane only
+	if Input.is_action_pressed("move_forward"):
+		_move_direction -= Camera.global_transform.basis.z
+		_is_moving = true;
 
-	
-	var _forward = Camera.global_transform.basis.z
-	var _right = Camera.global_transform.basis.x
-	
-	
-	var _input_direction := Vector3.ZERO
-	_input_direction.z = Input.get_axis("move_forward","move_back")
-	if velocity.y != 0:
-		_input_direction.x = Input.get_axis("move_left","move_right")
+	if Input.is_action_pressed("move_back"):
+		_move_direction += Camera.global_transform.basis.z
+		_is_moving = true;
 
 	if Input.is_action_pressed("fly"):
-		velocity.y = FLY_VELOCITY
-	else:
-		velocity.y -= GRAVITY * delta
-	
-	
+		_move_direction += Camera.global_transform.basis.y
+		_is_moving = true;
 
-	var _direction = (_right * _input_direction.x + _forward * _input_direction.z).normalized()
-	
-	if _direction != Vector3.ZERO:
-		velocity.x = _direction.x * SPEED * delta
-		velocity.z = _direction.z * SPEED * delta
-		velocity.y -= GRAVITY * delta
+	###############
+
+	velocity = lerp(velocity, Vector3.ZERO, 0.1);
+
+	if (_is_moving):
+		velocity += _move_direction * ACCELERATION * delta;
 	else:
-		if is_on_floor():
-			velocity.x = 0.0
-			velocity.z = 0.0
-		else:
-			velocity.x = lerp(velocity.x, 0.0, DECELERATION * delta)
-			velocity.z = lerp(velocity.z, 0.0, DECELERATION * delta)
+		if (!is_on_floor()):
+			velocity += Vector3.DOWN * GRAVITY * delta;
+
+	print(velocity.length())
+
+	velocity.limit_length(MAX_SPEED);
 
 	move_and_slide()
 
+func _decideAndApplyAnimation() -> void:
 	var yaw_diff = _target_camera_yaw - _last_camera_yaw
 	_last_camera_yaw = _target_camera_yaw
-	var YAW_THRESHOLD = deg_to_rad(0.5)
 
 	var desired_animation := ""
 
@@ -129,6 +98,23 @@ func _physics_process(delta: float) -> void:
 	if playback.get_current_node() != desired_animation:
 		playback.travel(desired_animation)
 
+#############
+
+func _ready() -> void:
+	_last_camera_yaw = _target_camera_yaw
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func _physics_process(delta: float) -> void:
+	# print("CAMERA - ", Camera.global_transform.basis.y);
+	# print("PITCH PIVOT - ", PitchPivot.global_transform.basis.y);
+
+	_rotateCamera()
+	_rotateModel()
+	if is_on_floor():
+		_target_camera_pitch = deg_to_rad(-15)
+
+	_handleMovement(delta);
+	_decideAndApplyAnimation();
 			
 	if GameState.inside_food:
 		if Input.is_action_pressed("eat"):
@@ -144,6 +130,7 @@ func _physics_process(delta: float) -> void:
 				WalkingSound.play()
 		else:
 			WalkingSound.stop()
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion):
@@ -163,9 +150,26 @@ func _unhandled_input(event: InputEvent) -> void:
 
 		_target_camera_yaw += _yaw;
 		if not is_on_floor():
-				_target_camera_pitch += _pitch
+			_target_camera_pitch += _pitch
 		else:
-				_target_camera_pitch = deg_to_rad(-15)
+			_target_camera_pitch = deg_to_rad(-15)
+
+func _process(delta):
+	var right_stick_x = Input.get_joy_axis(0, JOY_AXIS_RIGHT_X)
+	var right_stick_y = Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
+	
+	if abs(right_stick_x) > 0.1 or abs(right_stick_y) > 0.1:
+		var _yaw = -right_stick_x * CAMERA_SENSITIVITY * 200 * delta
+		var _pitch = -right_stick_y * CAMERA_SENSITIVITY * 200 * delta
+		
+		_target_camera_yaw += _yaw
+		if not is_on_floor():
+			_target_camera_pitch += _pitch
+		else:
+			_target_camera_pitch = deg_to_rad(-15)
+	
+	if is_on_floor() and _target_camera_pitch != deg_to_rad(-15):
+		_target_camera_pitch = deg_to_rad(-15)
 
 func _on_eat_pressed(delta: float):
 	print("eat")
