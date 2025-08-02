@@ -1,17 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://browrbdltohk1"]
+[gd_scene load_steps=11 format=3 uid="uid://cqpyc2x2lbjmb"]
 
-[ext_resource type="Script" uid="uid://coo0j4chw3x46" path="res://room.gd" id="1_4o3f6"]
-[ext_resource type="PackedScene" uid="uid://cmhuo4csf1fj4" path="res://player_fly.tscn" id="1_88gup"]
-[ext_resource type="PackedScene" uid="uid://cfy70qk473650" path="res://kitchen_environment.tscn" id="2_bisa2"]
+[ext_resource type="Script" path="res://room.gd" id="1_4o3f6"]
+[ext_resource type="PackedScene" uid="uid://sggjfsxhpfgq" path="res://player_fly.tscn" id="1_88gup"]
+[ext_resource type="PackedScene" path="res://kitchen_environment.tscn" id="2_bisa2"]
+[ext_resource type="Environment" uid="uid://dgohufk4uumqy" path="res://scene/WorldEnvironment.tres" id="3_01y1d"]
 [ext_resource type="PackedScene" uid="uid://b1msn131f82fi" path="res://food.tscn" id="3_4o3f6"]
-[ext_resource type="PackedScene" uid="uid://dcsdewssu0eov" path="res://ui_layer.tscn" id="5_ka7wq"]
+[ext_resource type="PackedScene" path="res://ui_layer.tscn" id="5_ka7wq"]
 [ext_resource type="AudioStream" uid="uid://dsullup1dunb0" path="res://assets/music/ambient1.wav" id="6_x5k2b"]
-
-[sub_resource type="Environment" id="Environment_bisa2"]
-
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_4o3f6"]
-
-[sub_resource type="Compositor" id="Compositor_v5vuv"]
+[ext_resource type="PackedScene" uid="uid://dhoptd3tntbth" path="res://assets/environment/Envi_Clutter.fbx" id="7_8cv3p"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bisa2"]
 
@@ -23,31 +19,44 @@ script = ExtResource("1_4o3f6")
 food_scene = ExtResource("3_4o3f6")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_bisa2")
-camera_attributes = SubResource("CameraAttributesPractical_4o3f6")
-compositor = SubResource("Compositor_v5vuv")
+environment = ExtResource("3_01y1d")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.0461853, 0.497862, 0, 0.995725, 0.0923706, -0.5, 0.0799953, -0.862323, 0, 0, 0)
+light_color = Color(0.696525, 0.627364, 0.529807, 1)
+light_energy = 3.262
+shadow_enabled = true
+sky_mode = 1
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.96936, -0.796352)
+light_color = Color(0.812213, 0.688509, 0.555235, 1)
+light_energy = 6.062
+light_volumetric_fog_energy = 1.8
+spot_angle = 55.0788
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_88gup")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.59274, 1.69789, 0.829322)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.419547, 0.725167, -0.545997, 0.165001, 0.53055, 0.831439, 0.892611, -0.438918, 0.102938, -0.77167, 3.46899, 1.72097)
-light_energy = 4.394
-
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
+visible = false
 disable_mode = 1
 physics_material_override = SubResource("PhysicsMaterial_bisa2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.827148, 0.283137, -0.706474)
+visible = false
 shape = SubResource("BoxShape3D_bisa2")
 
 [node name="Kitchen_Environment2" parent="." instance=ExtResource("2_bisa2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0, 1.015)
 
 [node name="CanvasLayer" parent="." instance=ExtResource("5_ka7wq")]
+visible = false
 
 [node name="MusicPlayer" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.63837)
+visible = false
 stream = ExtResource("6_x5k2b")
 autoplay = true
+
+[node name="Envi_Clutter" parent="." instance=ExtResource("7_8cv3p")]
