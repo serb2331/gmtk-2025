@@ -126,6 +126,11 @@ func _physics_process(delta: float) -> void:
 	if playback.get_current_node() != desired_animation:
 		playback.travel(desired_animation)
 
+			
+	if GameState.inside_food:
+		if Input.is_action_pressed("eat"):
+			_on_eat_pressed(delta)
+
 func _unhandled_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion):
 		# print(event.screen_relative)
@@ -147,3 +152,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				_target_camera_pitch += _pitch
 		else:
 				_target_camera_pitch = deg_to_rad(-15)
+
+func _on_eat_pressed(delta: float):
+	print("eat")
+	GameState.food += 10 * delta
