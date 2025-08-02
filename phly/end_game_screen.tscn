@@ -1,0 +1,69 @@
+[gd_scene load_steps=5 format=3 uid="uid://bgrpq825tix4"]
+
+[ext_resource type="Texture2D" uid="uid://cein560g8c5jq" path="res://assets/player/textures/M_Wings_Roughness.jpg" id="1_eg3hn"]
+[ext_resource type="Script" uid="uid://d0xt6a7jjdx2i" path="res://end_game_screen.gd" id="1_ijwp0"]
+[ext_resource type="FontFile" uid="uid://dbypm7vmyvbs7" path="res://fonts/ferrum.otf" id="2_qxwmb"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qxwmb"]
+texture = ExtResource("1_eg3hn")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ijwp0")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = 1.0
+offset_right = 17.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_qxwmb")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -162.0
+offset_top = -98.5
+offset_right = 162.0
+offset_bottom = 98.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_qxwmb")
+theme_override_font_sizes/font_size = 64
+text = "You Died"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="ExitButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Exit"
+
+[node name="RetryButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Retry"
+
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
