@@ -1,5 +1,7 @@
 extends Node3D
 
+@export var area_shape: CollisionShape3D
+
 var size: int = 1
 
 func set_size(new_size: int) -> void:
@@ -34,6 +36,11 @@ func set_type(food_instance: Node) -> void:
 
 			collision_shape.shape = my_mesh.mesh.create_trimesh_shape()
 			static_body.transform = my_mesh.transform
+
+
+			area_shape.shape = my_mesh.mesh.create_trimesh_shape()
+			area_shape.transform = my_mesh.transform
+			area_shape.scale = my_mesh.scale * 1.2
 		else:
 			print("No MeshInstance3D found in this scene")
 	else:
