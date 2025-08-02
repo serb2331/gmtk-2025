@@ -5,7 +5,7 @@ const IDLE_STATE = 1
 const PURSUING_STATE = 2
 
 @onready var spider_animation : AnimationPlayer = $Spider/AnimationPlayer
-@onready var animation_tree: AnimationTree = $Fly/AnimationTree
+@onready var animation_tree: AnimationTree = $Spider/AnimationTree
 
 var player: Node3D = null
 var speed = 0.3
@@ -17,20 +17,29 @@ func _ready() -> void:
 
 func move_from_to(from_pos: Vector3, to_pos: Vector3) -> Vector3:
 	return (to_pos - from_pos).normalized()
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
 	
-	var desired_animation := ""
+func rotate_model(direction):
+	var target_rotation = Vector3(0, atan2(direction.x, direction.z), 0)
+	rotation.y = lerp_angle(rotation.y, target_rotation.y, 0.1)  
+	
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(delta: float) -> void:
+	
+	var desired_animation := "idle"
 	velocity.y -= GRAVITY * delta
+	
 	if player != null and spider_state == PURSUING_STATE:
 		var player_pos = player.global_transform.origin
 		print("Player position: ", player_pos)
 		var direction = move_from_to(global_transform.origin, player.global_transform.origin)
+		rotate_model(direction)
+		desired_animation = "walk"
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
 	velocity.y -= GRAVITY * delta
+	
 	move_and_slide()
-	desired_animation = "idle"
+	
 	var playback = animation_tree.get("parameters/playback")
 	if playback.get_current_node() != desired_animation:
 		playback.travel(desired_animation)

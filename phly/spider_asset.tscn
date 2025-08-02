@@ -1,0 +1,118 @@
+[gd_scene load_steps=16 format=3 uid="uid://b0n7f15ajm4ay"]
+
+[ext_resource type="PackedScene" uid="uid://bce2sh4uo2h7d" path="res://assets/enemies/Spider_Rig.fbx" id="1_wbxef"]
+[ext_resource type="Script" uid="uid://ckxjc0dj506fv" path="res://scripts/spider_asset.gd" id="2_dctt1"]
+[ext_resource type="Animation" uid="uid://cf68og4x87p32" path="res://assets/player/anim/A_Born.res" id="3_dxsdh"]
+[ext_resource type="Animation" uid="uid://downd5lvkanoh" path="res://assets/player/anim/A_Death.res" id="4_ww40m"]
+[ext_resource type="Animation" uid="uid://bac7ekoxy5axo" path="res://assets/player/anim/A_Eating.res" id="5_ot0uo"]
+[ext_resource type="Animation" uid="uid://c63mykp4ugpf2" path="res://assets/player/anim/A_Flying.res" id="6_bw5ec"]
+[ext_resource type="Animation" uid="uid://bovk60qpabusk" path="res://assets/player/anim/A_Idle.res" id="7_ih0j4"]
+[ext_resource type="Animation" uid="uid://xrvfhc04jfd5" path="res://assets/player/anim/A_Test.res" id="8_62r4v"]
+[ext_resource type="Animation" uid="uid://cblntgwfcm4h7" path="res://assets/player/anim/A_Walk_Forward.res" id="9_v6lvd"]
+[ext_resource type="Animation" uid="uid://drlqnr6bgoejl" path="res://assets/player/anim/A_Walk_Left.res" id="10_njj75"]
+[ext_resource type="Animation" uid="uid://cq5uh5jitpabv" path="res://assets/player/anim/A_Walk_Right.res" id="11_ktl11"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_wbxef"]
+
+[sub_resource type="Animation" id="Animation_fy1cs"]
+resource_name = "Take 001"
+length = 6.66667
+tracks/0/type = "rotation_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton3D:R_front_leg_start_jnt")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -0.890522, -0.295005, 0.276829, 0.208106)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skeleton3D:R_mid_leg_start_jnt")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -0.884921, -0.465704, 0.00442768, 0.00381865)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("Skeleton3D:R_end_leg_start_jnt")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, -0.816114, -0.384041, -0.382088, -0.201194)
+tracks/3/type = "rotation_3d"
+tracks/3/imported = true
+tracks/3/enabled = true
+tracks/3/path = NodePath("Skeleton3D:R_mid_leg_2_jnt")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, -0.977769, 0.209684, -7.21535e-17, 4.71511e-17)
+tracks/4/type = "rotation_3d"
+tracks/4/imported = true
+tracks/4/enabled = true
+tracks/4/path = NodePath("Skeleton3D:R_end_leg_2_jnt")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, -0.954129, 0.299396, -4.48151e-17, 5.01136e-17)
+tracks/5/type = "rotation_3d"
+tracks/5/imported = true
+tracks/5/enabled = true
+tracks/5/path = NodePath("Skeleton3D:L_mid_leg_end_jnt")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = PackedFloat32Array(0, 1, -0.998871, -0.047503, 2.90872e-18, 6.11632e-17)
+tracks/6/type = "rotation_3d"
+tracks/6/imported = true
+tracks/6/enabled = true
+tracks/6/path = NodePath("Skeleton3D:R_mid_leg_end_jnt")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = PackedFloat32Array(0, 1, -0.998871, -0.047503, 7.40481e-17, 5.77801e-17)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xfj5d"]
+_data = {
+&"Take 001": SubResource("Animation_fy1cs")
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_33lmx"]
+_data = {
+&"A_Born": ExtResource("3_dxsdh"),
+&"A_Death": ExtResource("4_ww40m"),
+&"A_Eating": ExtResource("5_ot0uo"),
+&"A_Flying": ExtResource("6_bw5ec"),
+&"A_Idle": ExtResource("7_ih0j4"),
+&"A_Test": ExtResource("8_62r4v"),
+&"A_Walk_Forward": ExtResource("9_v6lvd"),
+&"A_Walk_Left": ExtResource("10_njj75"),
+&"A_Walk_Right": ExtResource("11_ktl11")
+}
+
+[node name="Spider_Rig" node_paths=PackedStringArray("animation_player", "animation_tree") instance=ExtResource("1_wbxef")]
+script = ExtResource("2_dctt1")
+animation_player = NodePath("AnimationPlayer")
+animation_tree = NodePath("AnimationTree")
+
+[node name="Skeleton3D" parent="." index="0"]
+bones/3/rotation = Quaternion(-1.5458e-16, -2.10791e-17, -0.157312, 0.987549)
+bones/4/rotation = Quaternion(0.954129, -0.299396, -7.27249e-17, 1.4545e-16)
+bones/7/rotation = Quaternion(-2.19574e-18, -1.67425e-18, -0.157312, 0.987549)
+bones/8/rotation = Quaternion(0.977769, -0.209684, -4.62946e-17, 2.10682e-16)
+bones/9/rotation = Quaternion(0.998871, 0.047503, 2.82211e-18, -2.18388e-16)
+bones/11/rotation = Quaternion(-2.86366e-17, -3.04264e-17, -0.246136, 0.969235)
+bones/12/rotation = Quaternion(-2.88095e-17, -4.86159e-17, -0.267999, 0.963419)
+bones/15/rotation = Quaternion(1.57649e-16, -1.22924e-17, -0.202012, 0.979383)
+bones/17/rotation = Quaternion(5.72731e-17, 3.40059e-17, -0.246136, 0.969235)
+bones/18/rotation = Quaternion(-7.20236e-17, 9.18301e-17, -0.267999, 0.963419)
+bones/21/rotation = Quaternion(-1.65559e-16, -4.52872e-18, -0.157312, 0.987549)
+bones/22/rotation = Quaternion(0.977769, -0.209684, -1.63556e-18, -1.24635e-16)
+bones/23/rotation = Quaternion(0.998871, 0.047503, -7.38091e-18, -1.0203e-16)
+bones/25/rotation = Quaternion(7.02638e-17, -1.25641e-24, -0.157312, 0.987549)
+bones/26/rotation = Quaternion(0.954129, -0.299396, -1.67267e-16, 1.4545e-17)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="1"]
+tree_root = SubResource("AnimationNodeStateMachine_wbxef")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="AnimationPlayer" parent="." index="2"]
+libraries = {
+&"": SubResource("AnimationLibrary_xfj5d"),
+&"anim": SubResource("AnimationLibrary_33lmx")
+}
