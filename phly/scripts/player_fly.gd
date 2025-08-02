@@ -5,7 +5,7 @@ extends CharacterBody3D
 const SPEED = 25
 const FLY_VELOCITY = 0.2
 
-const ROTATION_MAX_DEGREE = 50
+const ROTATION_MAX_DEGREE = 50	
 
 const GRAVITY_MULTIPLIER_WHEN_FLYING = 0.02
 const ACCELERATION = 8
@@ -18,6 +18,9 @@ var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var Model : Node3D = $Fly
 @onready var animation_tree: AnimationTree = $Fly/AnimationTree
 const ROTATION_SPEED = 90.0  
+@onready var FlyAnimation : AnimationPlayer = $Fly/AnimationPlayer
+@onready var FlyingSound : AudioStreamPlayer = $FlyingSound
+@onready var WalkingSound : AudioStreamPlayer = $WalkingSound
 const MIN_PITCH = deg_to_rad(-(ROTATION_MAX_DEGREE))
 const MAX_PITCH = deg_to_rad(ROTATION_MAX_DEGREE)
 const CAMERA_SENSITIVITY = 0.01
@@ -112,6 +115,21 @@ func _physics_process(delta: float) -> void:
 
 	_handleMovement(delta);
 	_decideAndApplyAnimation();
+			
+	if GameState.inside_food:
+		if Input.is_action_pressed("eat"):
+			_on_eat_pressed(delta)
+	if velocity.y != 0:
+		if not FlyingSound.playing:
+			FlyingSound.play()
+		WalkingSound.stop()
+	else:
+		FlyingSound.stop()
+		if is_on_floor() and (abs(velocity.x) > 0.1 or abs(velocity.z) > 0.1):
+			if not WalkingSound.playing:
+				WalkingSound.play()
+		else:
+			WalkingSound.stop()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion):
@@ -130,3 +148,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				_target_camera_pitch += _pitch
 		else:
 				_target_camera_pitch = deg_to_rad(-15)
+
+func _on_eat_pressed(delta: float):
+	print("eat")
+	GameState.food += 10 * delta
