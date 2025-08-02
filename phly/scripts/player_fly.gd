@@ -35,8 +35,8 @@ func _rotateCamera() -> void:
 	PitchPivot.rotation.x = lerp_angle(PitchPivot.rotation.x, _target_camera_pitch, 0.1);
 	
 func _rotateModel() -> void:
-	Model.rotation.x = -PitchPivot.rotation.x;
-	Model.rotation.y = TwistPivot.rotation.y - PI;
+	Model.rotation.x = -_target_camera_pitch;
+	Model.rotation.y = _target_camera_yaw - PI;
 
 func _handleMovement(delta) -> void:
 
