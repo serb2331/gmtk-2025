@@ -4,6 +4,8 @@ var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity")
 const IDLE_STATE = 1
 const PURSUING_STATE = 2
 
+@onready var spider_animation : AnimationPlayer = $Spider/AnimationPlayer
+@onready var animation_tree: AnimationTree = $Fly/AnimationTree
 
 var player: Node3D = null
 var speed = 0.3
@@ -17,6 +19,8 @@ func move_from_to(from_pos: Vector3, to_pos: Vector3) -> Vector3:
 	return (to_pos - from_pos).normalized()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
+	var desired_animation := ""
 	velocity.y -= GRAVITY * delta
 	if player != null and spider_state == PURSUING_STATE:
 		var player_pos = player.global_transform.origin
@@ -26,6 +30,10 @@ func _process(delta: float) -> void:
 		velocity.z = direction.z * speed
 	velocity.y -= GRAVITY * delta
 	move_and_slide()
+	desired_animation = "idle"
+	var playback = animation_tree.get("parameters/playback")
+	if playback.get_current_node() != desired_animation:
+		playback.travel(desired_animation)
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
