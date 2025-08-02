@@ -1,6 +1,7 @@
 extends Node3D
 
 @export var animation_player: AnimationPlayer
+@export var animation_tree: AnimationTree
 
 func _ready():
 	var idle_animation = load("res://assets/player/anim/A_Idle.res")
@@ -19,3 +20,41 @@ func _ready():
 	animation_player.get_animation_library("").add_animation("fly", flying_animation)
 	
 	animation_player.play("idle")
+
+	animation_tree.active = true
+	animation_tree.anim_player = animation_player.get_path()
+	animation_tree["parameters/playback"].travel("idle")
+	
+	var state_machine = AnimationNodeStateMachine.new()
+	animation_tree.tree_root = state_machine
+
+	state_machine.add_node("idle", AnimationNodeAnimation.new())
+	state_machine.add_node("walk", AnimationNodeAnimation.new())
+	state_machine.add_node("walk_left", AnimationNodeAnimation.new())
+	state_machine.add_node("walk_right", AnimationNodeAnimation.new())
+	state_machine.add_node("fly", AnimationNodeAnimation.new())
+
+	state_machine.get_node("idle").animation = "idle"
+	state_machine.get_node("walk").animation = "walk"
+	state_machine.get_node("walk_left").animation = "walk_left"
+	state_machine.get_node("walk_right").animation = "walk_right"
+	state_machine.get_node("fly").animation = "fly"
+
+	var blend_time = AnimationNodeStateMachineTransition.new()
+	blend_time.xfade_time = 0.2
+	state_machine.add_transition("idle", "walk",blend_time)
+	state_machine.add_transition("walk", "idle", blend_time)
+	state_machine.add_transition("walk", "walk_left", blend_time)
+	state_machine.add_transition("walk", "walk_right", blend_time)
+	state_machine.add_transition("walk_left", "walk", blend_time)
+	state_machine.add_transition("walk_right", "walk", blend_time)
+	state_machine.add_transition("idle", "fly", blend_time)
+	state_machine.add_transition("fly", "idle", blend_time)
+	state_machine.add_transition("walk", "fly", blend_time)
+	state_machine.add_transition("fly", "walk", blend_time)
+	state_machine.add_transition("walk_left", "fly", blend_time)
+	state_machine.add_transition("fly", "walk_left", blend_time)
+	state_machine.add_transition("walk_right", "fly", blend_time)
+	state_machine.add_transition("fly", "walk_right", blend_time)
+
+	animation_tree.set("parameters/playback", NodePath("parameters/playback"))
