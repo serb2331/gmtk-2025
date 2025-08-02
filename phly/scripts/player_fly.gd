@@ -147,8 +147,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		var _yaw := 0.0
 		var _pitch := 0.0
 
-		_yaw = -event.screen_relative.x * CAMERA_SENSITIVITY
-		_pitch = -event.screen_relative.y * CAMERA_SENSITIVITY
+		_yaw = -event.relative.x * CAMERA_SENSITIVITY
+		_pitch = -event.relative.y * CAMERA_SENSITIVITY
 
 		print(_yaw, " ---- ", _pitch);
 
