@@ -69,13 +69,16 @@ func _physics_process(delta: float) -> void:
 	
 	var _input_direction := Vector3.ZERO
 	_input_direction.z = Input.get_axis("move_forward","move_back")
-	
-	if Input.is_action_pressed("fly"):
+	if velocity.y != 0:
 		_input_direction.x = Input.get_axis("move_left","move_right")
+
+	if Input.is_action_pressed("fly"):
 		velocity.y = FLY_VELOCITY
 	else:
 		velocity.y -= GRAVITY * delta
 	
+	
+
 	var _direction = (_right * _input_direction.x + _forward * _input_direction.z).normalized()
 	
 	if _direction != Vector3.ZERO:
