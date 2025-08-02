@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bujvrvwrihkvv"
-path="res://.godot/imported/Spider.fbx-efbfd17570631781d72b3234bc243187.scn"
+uid="uid://bce2sh4uo2h7d"
+path="res://.godot/imported/Spider_Rig.fbx-72e9abca5281092aae573701f8fd6b48.scn"
 
 [deps]
 
-source_file="res://assets/enemies/Spider.fbx"
-dest_files=["res://.godot/imported/Spider.fbx-efbfd17570631781d72b3234bc243187.scn"]
+source_file="res://assets/enemies/Spider_Rig.fbx"
+dest_files=["res://.godot/imported/Spider_Rig.fbx-72e9abca5281092aae573701f8fd6b48.scn"]
 
 [params]
 
