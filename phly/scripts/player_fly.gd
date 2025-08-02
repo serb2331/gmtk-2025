@@ -76,7 +76,7 @@ func _decideAndApplyAnimation() -> void:
 	var yaw_diff = _target_camera_yaw - _last_camera_yaw
 	_last_camera_yaw = _target_camera_yaw
 
-	var desired_animation := "idle"
+	var desired_animation := "born"
 	
 	if velocity.y != 0:
 		desired_animation = "fly"
@@ -90,13 +90,16 @@ func _decideAndApplyAnimation() -> void:
 			elif yaw_diff < -YAW_THRESHOLD:
 				desired_animation = "walk_right"
 			else:
-				desired_animation = "idle"
+				desired_animation = "born"
 	else:
-		desired_animation = "idle"
+		desired_animation = "born"
 
 	if Input.is_action_pressed("eat") and GameState.inside_food:
 		desired_animation = "eat"
-			
+	if GameState.is_respawning:
+		desired_animation = "born"
+	if GameState.is_dying:
+		desired_animation = "die"	
 	var playback = animation_tree.get("parameters/playback")
 	if playback.get_current_node() != desired_animation:
 		playback.travel(desired_animation)
@@ -104,13 +107,14 @@ func _decideAndApplyAnimation() -> void:
 #############
 
 func _ready() -> void:
+	GameState.player = self
 	_last_camera_yaw = _target_camera_yaw
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _physics_process(delta: float) -> void:
 	# print("CAMERA - ", Camera.global_transform.basis.y);
 	# print("PITCH PIVOT - ", PitchPivot.global_transform.basis.y);
-	if !GameState.is_respawning:
+	if !GameState.is_respawning && !GameState.is_dying:
 		_rotateCamera()
 		_rotateModel()
 		if is_on_floor():
@@ -120,6 +124,8 @@ func _physics_process(delta: float) -> void:
 		_decideAndApplyAnimation();	if GameState.inside_food:
 			if Input.is_action_pressed("eat"):
 				_on_eat_pressed(delta)
+		if Input.is_action_just_pressed("respawn"):
+			GameState.set_respawn(global_transform.origin)
 		if velocity.y != 0:
 			if not FlyingSound.playing:
 				FlyingSound.play()

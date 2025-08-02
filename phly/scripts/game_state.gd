@@ -1,5 +1,6 @@
 extends Node
 
+var player: CharacterBody3D
 var health: int
 var score: int
 var food: float
@@ -7,13 +8,15 @@ var needed_food: float
 var inside_food: bool
 var can_respawn: bool
 var is_respawning: bool
+var is_dying: bool
 var respawn_location: Vector3
 
-const DECREMENT_VALUE = 1.0
+
+const DECREMENT_VALUE = 3.0
 const STARTING_FOOD = 0
 const starting_health_options := [100,50,80,120]
 const starting_food_options := [0,20,0,5,15]
-const respawning_treshold := [60,80,90,10]
+const respawning_treshold := [60,80,90,80]
 const MIN_HEALTH = 0
 const has_descendant = false
 var death_sound: AudioStreamPlayer
@@ -31,30 +34,41 @@ func initialize_food():
 
 func set_respawn(location):
 	if food > needed_food:
+		is_respawning = true
 		food -= needed_food
+		await get_tree().create_timer(2.0).timeout
 		respawn_location = location
 		can_respawn = true
+		is_respawning = false
 
 func decrement_health():
 	health -= DECREMENT_VALUE
 	if health <= MIN_HEALTH:
-		if !has_descendant:
-			handle_death()
-		else:
-			print("respawn")
+		handle_death()
 	
 func start_game():
 	print("starting game")
 	get_tree().change_scene_to_file("res://scenes/room.tscn")
 	
 func handle_death():
-	if death_sound:
-		death_sound.play()
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	get_tree().change_scene_to_file("res://scenes/end_game_screen.tscn")
+	if is_dying:
+		return
+	if can_respawn:
+		is_dying = true
+		if death_sound:
+			death_sound.play()
+		await get_tree().create_timer(2.0).timeout
+		initialize_health()
+		initialize_health()
+		player.global_position = respawn_location
+		is_dying = false
+	else:
+		if death_sound:
+			death_sound.play()
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		get_tree().change_scene_to_file("res://scenes/end_game_screen.tscn")
 	
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var death_audio = load("res://assets/music/fly/death.wav")
 	death_sound = AudioStreamPlayer.new()
@@ -63,6 +77,5 @@ func _ready() -> void:
 	add_child(death_sound)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
