@@ -44,6 +44,8 @@ const CAMERA_SENSITIVITY = 0.01
 
 var _target_camera_yaw := deg_to_rad(180)
 var _target_camera_pitch := deg_to_rad(-45)
+var _last_camera_yaw := 0.0
+
 
 func _rotateCamera() -> void:
 	TwistPivot.rotation.y = lerp_angle(TwistPivot.rotation.y, _target_camera_yaw, 0.1);
@@ -56,6 +58,7 @@ func _rotateModel() -> void:
 #############
 
 func _ready() -> void:
+	_last_camera_yaw = _target_camera_yaw
 	print("FlyAnimation: ", FlyAnimation)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
@@ -69,13 +72,16 @@ func _physics_process(delta: float) -> void:
 	
 	var _input_direction := Vector3.ZERO
 	_input_direction.z = Input.get_axis("move_forward","move_back")
-	
-	if Input.is_action_pressed("fly"):
+	if velocity.y != 0:
 		_input_direction.x = Input.get_axis("move_left","move_right")
+
+	if Input.is_action_pressed("fly"):
 		velocity.y = FLY_VELOCITY
 	else:
 		velocity.y -= GRAVITY * delta
 	
+	
+
 	var _direction = (_right * _input_direction.x + _forward * _input_direction.z).normalized()
 	
 	if _direction != Vector3.ZERO:
@@ -92,6 +98,10 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+	var yaw_diff = _target_camera_yaw - _last_camera_yaw
+	_last_camera_yaw = _target_camera_yaw
+	var YAW_THRESHOLD = deg_to_rad(0.5)
+
 	var desired_animation := ""
 
 	if velocity.y != 0:
@@ -101,9 +111,14 @@ func _physics_process(delta: float) -> void:
 		if is_moving:
 			desired_animation = "walk"
 		else:
-			desired_animation = "idle"
+			if yaw_diff > YAW_THRESHOLD:
+				desired_animation = "walk_left"
+			elif yaw_diff < -YAW_THRESHOLD:
+				desired_animation = "walk_right"
+			else:
+				desired_animation = "idle"
 	else:
-		desired_animation = "idle" 
+		desired_animation = "idle"
 
 	if FlyAnimation.current_animation != desired_animation:
 		FlyAnimation.play(desired_animation)
