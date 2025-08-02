@@ -33,6 +33,8 @@ func initialize_food():
 	return food
 
 func set_respawn(location):
+	if is_respawning:
+		return
 	if food > needed_food:
 		is_respawning = true
 		food -= needed_food
@@ -59,7 +61,7 @@ func handle_death():
 			death_sound.play()
 		await get_tree().create_timer(2.0).timeout
 		initialize_health()
-		initialize_health()
+		initialize_food()
 		player.global_position = respawn_location
 		is_dying = false
 	else:
