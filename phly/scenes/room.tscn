@@ -50,7 +50,6 @@ shape = SubResource("BoxShape3D_bisa2")
 [node name="Kitchen_Environment2" parent="." instance=ExtResource("2_bisa2")]
 
 [node name="CanvasLayer" parent="." instance=ExtResource("5_ka7wq")]
-visible = false
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_x5k2b")

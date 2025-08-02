@@ -19,7 +19,6 @@ const ROTATION_SPEED = 90.0
 @onready var FlyAnimation : AnimationPlayer = $Fly/AnimationPlayer
 @onready var FlyingSound : AudioStreamPlayer = $FlyingSound
 @onready var WalkingSound : AudioStreamPlayer = $WalkingSound
-const ROTATION_SPEED = 90.0  # degrees per second
 const MIN_PITCH = deg_to_rad(-(ROTATION_MAX_DEGREE))
 const MAX_PITCH = deg_to_rad(ROTATION_MAX_DEGREE)
 const DECELERATION = 5
