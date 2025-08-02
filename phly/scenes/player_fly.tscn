@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://sggjfsxhpfgq"]
+[gd_scene load_steps=6 format=3 uid="uid://sggjfsxhpfgq"]
 
 [ext_resource type="Script" uid="uid://cja4hhwtrelip" path="res://scripts/player_fly.gd" id="1_cowcd"]
 [ext_resource type="PackedScene" uid="uid://de1h3gx4jutl8" path="res://assets/player/fly_scene.tscn" id="2_ybtsn"]
-[ext_resource type="PackedScene" uid="uid://dcsdewssu0eov" path="res://scenes/ui_layer.tscn" id="3_oboj8"]
+[ext_resource type="AudioStream" path="res://assets/music/fly/wings-flap.wav" id="3_flying"]
+[ext_resource type="AudioStream" path="res://assets/music/fly/walk.wav" id="4_walking"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ybtsn"]
 size = Vector3(0.001, 0.0110449, 0.0156421)
@@ -28,4 +29,12 @@ transform = Transform3D(1, -7.10543e-15, 7.10543e-15, 1.42109e-14, 1, 0, -1.4210
 current = true
 near = 0.01
 
-[node name="CanvasLayer" parent="." instance=ExtResource("3_oboj8")]
+[node name="FlyingSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_flying")
+volume_db = -6.0
+autoplay = false
+
+[node name="WalkingSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_walking")
+volume_db = -2.0
+autoplay = false

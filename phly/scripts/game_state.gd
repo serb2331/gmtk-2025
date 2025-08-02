@@ -1,9 +1,9 @@
 extends Node
 
-
 var health: int
 var score: int
 var food: int
+var death_sound: AudioStreamPlayer
 const DECREMENT_VALUE = 1.0
 const STARTING_FOOD = 0
 const starting_health_options := [100,50,80,120]
@@ -27,13 +27,19 @@ func start_game():
 	get_tree().change_scene_to_file("res://room.tscn")
 	
 func handle_death():
+	if death_sound:
+		death_sound.play()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_tree().change_scene_to_file("res://scenes/end_game_screen.tscn")
 	
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	var death_audio = load("res://assets/music/fly/death.wav")
+	death_sound = AudioStreamPlayer.new()
+	death_sound.stream = death_audio
+	death_sound.volume_db = -2.0
+	add_child(death_sound)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
