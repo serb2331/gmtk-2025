@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlvwdklf5gng4"]
+
+[ext_resource type="Script" uid="uid://b14iepqtc4kh6" path="res://scenes/spider_web.gd" id="1_4jtdv"]
+[ext_resource type="PackedScene" uid="uid://crr0hfg6gn6aj" path="res://assets/enemies/Web.fbx" id="1_dxjea"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dxjea"]
+size = Vector3(0.249268, 0.186768, 0.001)
+
+[node name="SpiderWeb" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000210524, 0.000485048, -7.39396e-05)
+script = ExtResource("1_4jtdv")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0.00948577, 0.0549159, -0.066991)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_dxjea")
+
+[node name="Web" parent="." instance=ExtResource("1_dxjea")]
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
