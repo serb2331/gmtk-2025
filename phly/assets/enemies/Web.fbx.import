@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bujvrvwrihkvv"
-path="res://.godot/imported/Spider.fbx-efbfd17570631781d72b3234bc243187.scn"
+uid="uid://crr0hfg6gn6aj"
+path="res://.godot/imported/Web.fbx-6aae41dbec2f8104cde787f03146c72c.scn"
 
 [deps]
 
-source_file="res://assets/enemies/Spider.fbx"
-dest_files=["res://.godot/imported/Spider.fbx-efbfd17570631781d72b3234bc243187.scn"]
+source_file="res://assets/enemies/Web.fbx"
+dest_files=["res://.godot/imported/Web.fbx-6aae41dbec2f8104cde787f03146c72c.scn"]
 
 [params]
 
@@ -34,9 +34,9 @@ animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={
 "materials": {
-"M_Spider": {
+"M_Web": {
 "use_external/enabled": true,
-"use_external/path": "uid://bj4o4dx0g56e2"
+"use_external/path": "uid://cnekodthpm02f"
 }
 }
 }
