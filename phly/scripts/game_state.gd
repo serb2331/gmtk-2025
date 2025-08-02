@@ -3,7 +3,9 @@ extends Node
 
 var health: int
 var score: int
+var food: int
 const DECREMENT_VALUE = 1.0
+const STARTING_FOOD = 0
 const starting_health_options := [100,50,80,120]
 const MIN_HEALTH = 0
 const has_descendant = false
@@ -26,7 +28,7 @@ func start_game():
 	
 func handle_death():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	get_tree().change_scene_to_file("res://end_game_screen.tscn")
+	get_tree().change_scene_to_file("res://scenes/end_game_screen.tscn")
 	
 
 # Called when the node enters the scene tree for the first time.
