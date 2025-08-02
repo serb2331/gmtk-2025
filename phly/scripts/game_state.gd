@@ -3,12 +3,16 @@ extends Node
 var health: int
 var score: int
 var food: float
+var needed_food: float
 var inside_food: bool
+var can_respawn: bool
+var respawn_location: Vector3
 
 const DECREMENT_VALUE = 1.0
 const STARTING_FOOD = 0
 const starting_health_options := [100,50,80,120]
 const starting_food_options := [0,20,0,5,15]
+const respawning_treshold := [60,80,90,10]
 const MIN_HEALTH = 0
 const has_descendant = false
 var death_sound: AudioStreamPlayer
@@ -18,8 +22,16 @@ func initialize_health():
 	return health
 	
 func initialize_food():
+	can_respawn = false
 	food = starting_food_options[randi() % starting_food_options.size()]
+	needed_food = respawning_treshold[randi() % respawning_treshold.size()]
 	return food
+
+func set_respawn(location):
+	if food > needed_food:
+		food -= needed_food
+		respawn_location = location
+		can_respawn = true
 
 func decrement_health():
 	health -= DECREMENT_VALUE

@@ -107,10 +107,12 @@ func _physics_process(delta: float) -> void:
 	_last_camera_yaw = _target_camera_yaw
 	var YAW_THRESHOLD = deg_to_rad(0.5)
 
-	var desired_animation := ""
+	var desired_animation := "idle"
 
+	# 2. If flying, always fly
 	if velocity.y != 0:
 		desired_animation = "fly"
+	# 3. If on floor, check movement and rotation
 	elif is_on_floor():
 		var is_moving = abs(velocity.x) > 0.1 or abs(velocity.z) > 0.1
 		if is_moving:
@@ -125,6 +127,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		desired_animation = "idle"
 
+	if Input.is_action_pressed("eat") and GameState.inside_food:
+		desired_animation = "eat"
+			
 	var playback = animation_tree.get("parameters/playback")
 	if playback.get_current_node() != desired_animation:
 		playback.travel(desired_animation)
@@ -166,6 +171,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				_target_camera_pitch += _pitch
 		else:
 				_target_camera_pitch = deg_to_rad(-15)
+
 
 func _on_eat_pressed(delta: float):
 	print("eat")
