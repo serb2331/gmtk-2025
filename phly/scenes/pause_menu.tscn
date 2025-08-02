@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://drxhrjk6ox23k"]
 
-[ext_resource type="FontFile" uid="uid://dbypm7vmyvbs7" path="res://fonts/ferrum.otf" id="1_hdmo1"]
-[ext_resource type="Script" uid="uid://bigra2o72flyr" path="res://pause_menu.gd" id="1_nwcfo"]
-[ext_resource type="Texture2D" uid="uid://cein560g8c5jq" path="res://assets/player/textures/M_Wings_Roughness.jpg" id="2_05uyy"]
+[ext_resource type="Script" uid="uid://bigra2o72flyr" path="res://scripts/pause_menu.gd" id="1_kukqi"]
+[ext_resource type="Texture2D" uid="uid://cein560g8c5jq" path="res://assets/player/textures/M_Wings_Roughness.jpg" id="2_5d2l8"]
+[ext_resource type="FontFile" uid="uid://dbypm7vmyvbs7" path="res://fonts/ferrum.otf" id="3_7l7mv"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p81d2"]
-texture = ExtResource("2_05uyy")
+texture = ExtResource("2_5d2l8")
 
 [sub_resource type="Animation" id="Animation_05uyy"]
 length = 0.001
@@ -118,7 +118,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_nwcfo")
+script = ExtResource("1_kukqi")
 
 [node name="Panel" type="Panel" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -153,24 +153,24 @@ theme_override_constants/separation = 12
 
 [node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_hdmo1")
+theme_override_fonts/font = ExtResource("3_7l7mv")
 theme_override_font_sizes/font_size = 36
 text = "Menu"
 horizontal_alignment = 1
 
 [node name="ResumeButton" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_hdmo1")
+theme_override_fonts/font = ExtResource("3_7l7mv")
 text = "Resume"
 
 [node name="RestartButton" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_hdmo1")
+theme_override_fonts/font = ExtResource("3_7l7mv")
 text = "Restart"
 
 [node name="QuitButton" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_hdmo1")
+theme_override_fonts/font = ExtResource("3_7l7mv")
 text = "Quit"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
