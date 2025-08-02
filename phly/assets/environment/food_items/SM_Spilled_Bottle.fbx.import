@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cbrdh1sg07hrg"
-path="res://.godot/imported/SM_Bottle.fbx-d9019a45ff695caa46c17dd8667dc24e.scn"
+uid="uid://dgklmj7mtyt1t"
+path="res://.godot/imported/SM_Spilled_Bottle.fbx-56afcf86b6c91c5a4a3b3b5251c8e632.scn"
 
 [deps]
 
-source_file="res://assets/environment/food_items/SM_Bottle.fbx"
-dest_files=["res://.godot/imported/SM_Bottle.fbx-d9019a45ff695caa46c17dd8667dc24e.scn"]
+source_file="res://assets/environment/food_items/SM_Spilled_Bottle.fbx"
+dest_files=["res://.godot/imported/SM_Spilled_Bottle.fbx-56afcf86b6c91c5a4a3b3b5251c8e632.scn"]
 
 [params]
 
