@@ -25,7 +25,7 @@ func testEsc():
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	print("Children of this node: ", get_children())
-	pass
+	self.visible = false
 	anim_player.play("RESET")
 
 
