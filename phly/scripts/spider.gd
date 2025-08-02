@@ -8,11 +8,12 @@ const PURSUING_STATE = 2
 @onready var animation_tree: AnimationTree = $Spider/AnimationTree
 
 var player: Node3D = null
-var speed = 0.3
+var speed = 0.5
 var spider_state
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	add_to_group("enemies")
 	spider_state = IDLE_STATE
 
 func move_from_to(from_pos: Vector3, to_pos: Vector3) -> Vector3:
@@ -47,18 +48,11 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	spider_state = PURSUING_STATE
-	print(body)
 	if body.name == "Player":
 		player = body
-	print("eneterd spider teritory")
+	#print("eneterd spider teritory")
 
 
 func _on_area_3d_body_exited(body: Node3D) -> void:
-	print("exited spider teritory")
+	#print("exited spider teritory")
 	spider_state = IDLE_STATE
-
-
-func _on_kill_area_body_entered(body: Node3D) -> void:
-	if body.name == "Player":
-		print("killed by spider!")
-		GameState.handle_death()
