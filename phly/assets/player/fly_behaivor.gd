@@ -9,6 +9,9 @@ func _ready():
 	var walking_left = load("res://assets/player/anim/A_Walk_Left.res")
 	var walking_right = load("res://assets/player/anim/A_Walk_Right.res")
 	var flying_animation = load("res://assets/player/anim/A_Flying.res")
+	var eating_animation = load("res://assets/player/anim/A_Eating.res")
+	var respawn_animation = load("res://assets/player/anim/A_Born.res")
+	var death_animation = load("res://assets/player/anim/A_Death.res")
 	
 	if not animation_player.has_animation_library(""):
 		animation_player.add_animation_library("", AnimationLibrary.new())
@@ -18,6 +21,9 @@ func _ready():
 	animation_player.get_animation_library("").add_animation("walk_left", walking_left)
 	animation_player.get_animation_library("").add_animation("walk_right", walking_right)
 	animation_player.get_animation_library("").add_animation("fly", flying_animation)
+	animation_player.get_animation_library("").add_animation("eat", eating_animation)
+	animation_player.get_animation_library("").add_animation("born", respawn_animation)
+	animation_player.get_animation_library("").add_animation("die", death_animation)
 	
 	animation_player.play("idle")
 
@@ -33,12 +39,18 @@ func _ready():
 	state_machine.add_node("walk_left", AnimationNodeAnimation.new())
 	state_machine.add_node("walk_right", AnimationNodeAnimation.new())
 	state_machine.add_node("fly", AnimationNodeAnimation.new())
+	state_machine.add_node("eat", AnimationNodeAnimation.new())
+	state_machine.add_node("born", AnimationNodeAnimation.new())
+	state_machine.add_node("die", AnimationNodeAnimation.new())
 
 	state_machine.get_node("idle").animation = "idle"
 	state_machine.get_node("walk").animation = "walk"
 	state_machine.get_node("walk_left").animation = "walk_left"
 	state_machine.get_node("walk_right").animation = "walk_right"
 	state_machine.get_node("fly").animation = "fly"
+	state_machine.get_node("eat").animation = "eat"
+	state_machine.get_node("born").animation = "born"
+	state_machine.get_node("die").animation = "die"
 
 	var blend_time = AnimationNodeStateMachineTransition.new()
 	blend_time.xfade_time = 0.2
@@ -56,5 +68,25 @@ func _ready():
 	state_machine.add_transition("fly", "walk_left", blend_time)
 	state_machine.add_transition("walk_right", "fly", blend_time)
 	state_machine.add_transition("fly", "walk_right", blend_time)
+	state_machine.add_transition("walk", "eat", blend_time)
+	state_machine.add_transition("eat", "walt", blend_time)
+	state_machine.add_transition("eat", "idle", blend_time)
+	state_machine.add_transition("idle", "eat", blend_time)
+	state_machine.add_transition("eat", "fly", blend_time)
+	state_machine.add_transition("fly", "eat", blend_time)
+	state_machine.add_transition("fly", "born", blend_time)
+	state_machine.add_transition("born", "fly", blend_time)
+	state_machine.add_transition("born", "idle", blend_time)
+	state_machine.add_transition("idle", "born", blend_time)
+
+	state_machine.add_transition("die", "idle", blend_time)
+	state_machine.add_transition("idle", "die", blend_time)
+	state_machine.add_transition("die", "walk", blend_time)
+	state_machine.add_transition("walk", "die", blend_time)
+	state_machine.add_transition("die", "eat", blend_time)
+	state_machine.add_transition("eat", "die", blend_time)
+	state_machine.add_transition("die", "fly", blend_time)
+	state_machine.add_transition("fly", "die", blend_time)
+
 
 	animation_tree.set("parameters/playback", NodePath("parameters/playback"))
