@@ -1,14 +1,17 @@
 extends Control
 
+@onready var anim_player = $AnimationPlayer
 
 func resume():
+	self.visible = false
 	get_tree().paused = false
-	$AnimationPlayer.play_backwards("blur")
+	anim_player.play_backwards("blur")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func pause():
+	self.visible = true
 	get_tree().paused = true
-	$AnimationPlayer.play("blur")
+	anim_player.play("blur")
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func testEsc():
@@ -21,7 +24,9 @@ func testEsc():
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$AnimationPlayer.play("RESET")
+	print("Children of this node: ", get_children())
+	pass
+	anim_player.play("RESET")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

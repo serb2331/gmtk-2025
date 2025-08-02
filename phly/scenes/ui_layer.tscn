@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dcsdewssu0eov"]
+[gd_scene load_steps=9 format=3 uid="uid://dcsdewssu0eov"]
 
 [ext_resource type="Script" uid="uid://dg5pkb4codc4x" path="res://scripts/food_bar.gd" id="1_ibxbq"]
 [ext_resource type="FontFile" uid="uid://dbypm7vmyvbs7" path="res://fonts/ferrum.otf" id="2_pmv6g"]
+[ext_resource type="PackedScene" uid="uid://drxhrjk6ox23k" path="res://scenes/pause_menu.tscn" id="4_6gmgv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pxq32"]
 bg_color = Color(0.996078, 0.470588, 0.431373, 0.772549)
@@ -55,6 +56,8 @@ corner_radius_bottom_left = 8
 bg_color = Color(0.941176, 0.513726, 0, 1)
 
 [node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="PauseMenu" parent="." instance=ExtResource("4_6gmgv")]
 
 [node name="PlayerUI" type="Control" parent="."]
 layout_mode = 3
