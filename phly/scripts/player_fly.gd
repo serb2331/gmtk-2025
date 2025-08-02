@@ -14,8 +14,8 @@ var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity") *  GRAVI
 @onready var PitchPivot : Node3D = $TwistPivot/PitchPivot
 @onready var Camera := $TwistPivot/PitchPivot/Camera3D
 @onready var Model : Node3D = $Fly
-@onready var FlyAnimation : AnimationPlayer = $Fly/AnimationPlayer
-const ROTATION_SPEED = 90.0  # degrees per second
+@onready var animation_tree: AnimationTree = $Fly/AnimationTree
+const ROTATION_SPEED = 90.0  
 const MIN_PITCH = deg_to_rad(-(ROTATION_MAX_DEGREE))
 const MAX_PITCH = deg_to_rad(ROTATION_MAX_DEGREE)
 const DECELERATION = 5
@@ -59,12 +59,14 @@ func _rotateModel() -> void:
 
 func _ready() -> void:
 	_last_camera_yaw = _target_camera_yaw
-	print("FlyAnimation: ", FlyAnimation)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _physics_process(delta: float) -> void:
 	_rotateCamera()
 	_rotateModel()
+	if is_on_floor():
+		_target_camera_pitch = deg_to_rad(-15)
+
 	
 	var _forward = Camera.global_transform.basis.z
 	var _right = Camera.global_transform.basis.x
@@ -120,8 +122,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		desired_animation = "idle"
 
-	if FlyAnimation.current_animation != desired_animation:
-		FlyAnimation.play(desired_animation)
+	var playback = animation_tree.get("parameters/playback")
+	if playback.get_current_node() != desired_animation:
+		playback.travel(desired_animation)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion):
@@ -140,4 +143,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		# PitchPivot.rotate_x(_pitch);
 
 		_target_camera_yaw += _yaw;
-		_target_camera_pitch += _pitch;
+		if not is_on_floor():
+				_target_camera_pitch += _pitch
+		else:
+				_target_camera_pitch = deg_to_rad(-15)
