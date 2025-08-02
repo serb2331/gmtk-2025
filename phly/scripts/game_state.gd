@@ -10,6 +10,8 @@ var can_respawn: bool
 var is_respawning: bool
 var is_dying: bool
 var respawn_location: Vector3
+var is_caught_in_web: bool
+
 
 
 const DECREMENT_VALUE = 3.0
@@ -50,6 +52,7 @@ func decrement_health():
 	
 func start_game():
 	print("starting game")
+	is_caught_in_web = false
 	get_tree().change_scene_to_file("res://scenes/room.tscn")
 	
 func handle_death():

@@ -2,12 +2,12 @@ extends CharacterBody3D
 
 # i guess use m/s for speed and such(?)
 
-const SPEED = 25
+const SPEED = 18
 const FLY_VELOCITY = 0.2
 
 const ROTATION_MAX_DEGREE = 50	
 
-const GRAVITY_MULTIPLIER_WHEN_FLYING = 0.02
+const GRAVITY_MULTIPLIER_WHEN_FLYING = 0.010
 const ACCELERATION = 8
 const MAX_SPEED = 1
 var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -69,8 +69,8 @@ func _handleMovement(delta) -> void:
 	print(velocity.length())
 
 	velocity.limit_length(MAX_SPEED);
-
-	move_and_slide()
+	if not GameState.is_caught_in_web:
+		move_and_slide()
 
 func _decideAndApplyAnimation() -> void:
 	var yaw_diff = _target_camera_yaw - _last_camera_yaw
