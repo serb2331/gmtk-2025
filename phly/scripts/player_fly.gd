@@ -77,11 +77,9 @@ func _decideAndApplyAnimation() -> void:
 	_last_camera_yaw = _target_camera_yaw
 
 	var desired_animation := "idle"
-
-	# 2. If flying, always fly
+	
 	if velocity.y != 0:
 		desired_animation = "fly"
-	# 3. If on floor, check movement and rotation
 	elif is_on_floor():
 		var is_moving = abs(velocity.x) > 0.1 or abs(velocity.z) > 0.1
 		if is_moving:
@@ -112,29 +110,27 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	# print("CAMERA - ", Camera.global_transform.basis.y);
 	# print("PITCH PIVOT - ", PitchPivot.global_transform.basis.y);
+	if !GameState.is_respawning:
+		_rotateCamera()
+		_rotateModel()
+		if is_on_floor():
+			_target_camera_pitch = deg_to_rad(-15)
 
-	_rotateCamera()
-	_rotateModel()
-	if is_on_floor():
-		_target_camera_pitch = deg_to_rad(-15)
-
-	_handleMovement(delta);
-	_decideAndApplyAnimation();
-			
-	if GameState.inside_food:
-		if Input.is_action_pressed("eat"):
-			_on_eat_pressed(delta)
-	if velocity.y != 0:
-		if not FlyingSound.playing:
-			FlyingSound.play()
-		WalkingSound.stop()
-	else:
-		FlyingSound.stop()
-		if is_on_floor() and (abs(velocity.x) > 0.1 or abs(velocity.z) > 0.1):
-			if not WalkingSound.playing:
-				WalkingSound.play()
-		else:
+		_handleMovement(delta);
+		_decideAndApplyAnimation();	if GameState.inside_food:
+			if Input.is_action_pressed("eat"):
+				_on_eat_pressed(delta)
+		if velocity.y != 0:
+			if not FlyingSound.playing:
+				FlyingSound.play()
 			WalkingSound.stop()
+		else:
+			FlyingSound.stop()
+			if is_on_floor() and (abs(velocity.x) > 0.1 or abs(velocity.z) > 0.1):
+				if not WalkingSound.playing:
+					WalkingSound.play()
+			else:
+				WalkingSound.stop()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if (event is InputEventMouseMotion):

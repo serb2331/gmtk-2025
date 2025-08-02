@@ -6,6 +6,7 @@ var food: float
 var needed_food: float
 var inside_food: bool
 var can_respawn: bool
+var is_respawning: bool
 var respawn_location: Vector3
 
 const DECREMENT_VALUE = 1.0
@@ -23,6 +24,7 @@ func initialize_health():
 	
 func initialize_food():
 	can_respawn = false
+	is_respawning = false
 	food = starting_food_options[randi() % starting_food_options.size()]
 	needed_food = respawning_treshold[randi() % respawning_treshold.size()]
 	return food
