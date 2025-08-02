@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://dcsdewssu0eov"]
+[gd_scene load_steps=8 format=3 uid="uid://dcsdewssu0eov"]
 
-[ext_resource type="Script" uid="uid://dg5pkb4codc4x" path="res://food_bar.gd" id="1_ibxbq"]
-[ext_resource type="PackedScene" uid="uid://drxhrjk6ox23k" path="res://scenes/pause_menu.tscn" id="1_pxq32"]
+[ext_resource type="Script" uid="uid://dg5pkb4codc4x" path="res://scripts/food_bar.gd" id="1_ibxbq"]
 [ext_resource type="FontFile" uid="uid://dbypm7vmyvbs7" path="res://fonts/ferrum.otf" id="2_pmv6g"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pxq32"]
@@ -57,56 +56,67 @@ bg_color = Color(0.941176, 0.513726, 0, 1)
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
-[node name="LifeBar" type="ProgressBar" parent="."]
+[node name="PlayerUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerUI"]
+layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -185.0
-offset_top = 38.0
-offset_right = -24.0
-offset_bottom = 65.0
+offset_left = -190.0
+offset_top = 56.0
+offset_right = -29.0
+offset_bottom = 83.0
 grow_horizontal = 0
 theme_override_styles/background = SubResource("StyleBoxFlat_pxq32")
 theme_override_styles/fill = SubResource("StyleBoxFlat_pmv6g")
 show_percentage = false
 script = SubResource("GDScript_mow34")
 
-[node name="FoodBar" type="ProgressBar" parent="."]
+[node name="FoodBar" type="ProgressBar" parent="PlayerUI"]
+layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -185.0
-offset_top = 99.0
-offset_right = -24.0
-offset_bottom = 126.0
+offset_left = -190.0
+offset_top = 115.0
+offset_right = -29.0
+offset_bottom = 142.0
 grow_horizontal = 0
 theme_override_styles/background = SubResource("StyleBoxFlat_ibxbq")
 theme_override_styles/fill = SubResource("StyleBoxFlat_s3viw")
 show_percentage = false
 script = ExtResource("1_ibxbq")
 
-[node name="Label2" type="Label" parent="."]
+[node name="Label2" type="Label" parent="PlayerUI"]
+layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -180.0
-offset_top = 78.0
-offset_right = -94.0
-offset_bottom = 101.0
+offset_left = -190.0
+offset_top = 93.0
+offset_right = -104.0
+offset_bottom = 116.0
 grow_horizontal = 0
 theme_override_fonts/font = ExtResource("2_pmv6g")
 text = "Food"
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="PlayerUI"]
+layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -180.0
-offset_top = 17.0
-offset_right = -94.0
-offset_bottom = 40.0
+offset_left = -190.0
+offset_top = 30.0
+offset_right = -104.0
+offset_bottom = 53.0
 grow_horizontal = 0
 theme_override_fonts/font = ExtResource("2_pmv6g")
 text = "Life of Phly"
-
-[node name="PauseMenu" parent="." instance=ExtResource("1_pxq32")]
