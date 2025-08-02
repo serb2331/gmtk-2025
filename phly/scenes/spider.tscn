@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bl65pjc431inu"]
 
-[ext_resource type="Script" uid="uid://cuqdboksmqn26" path="res://scripts/spider.gd" id="1_c7em6"]
+[ext_resource type="Script" path="res://scripts/spider.gd" id="1_c7em6"]
 [ext_resource type="PackedScene" uid="uid://clv1ud42055f" path="res://scenes/spider_asset.tscn" id="2_algeo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k5hg5"]
