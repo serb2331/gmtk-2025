@@ -56,3 +56,9 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 func _on_area_3d_body_exited(body: Node3D) -> void:
 	print("exited spider teritory")
 	spider_state = IDLE_STATE
+
+
+func _on_kill_area_body_entered(body: Node3D) -> void:
+	if body.name == "Player":
+		print("killed by spider!")
+		GameState.handle_death()

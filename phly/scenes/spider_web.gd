@@ -13,4 +13,6 @@ func _process(delta: float) -> void:
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	print("you are being caught in the web")
+	if body.name == "Player" and !GameState.is_caught_in_web:
+		GameState.is_caught_in_web = true
 	
