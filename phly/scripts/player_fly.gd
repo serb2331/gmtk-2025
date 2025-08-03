@@ -119,7 +119,8 @@ func _physics_process(delta: float) -> void:
 			_target_camera_pitch = deg_to_rad(-15)
 
 		_handleMovement(delta);
-		_decideAndApplyAnimation();	if GameState.inside_food:
+		_decideAndApplyAnimation();	
+		if GameState.inside_food:
 			if Input.is_action_pressed("eat"):
 				_on_eat_pressed(delta)
 		if Input.is_action_just_pressed("respawn"):

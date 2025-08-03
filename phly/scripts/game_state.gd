@@ -36,15 +36,18 @@ func initialize_food():
 	needed_food = respawning_treshold[randi() % respawning_treshold.size()]
 	return food
 
+func can_lay_egg():
+	return food > needed_food
+
 func set_respawn(location):
 	if is_respawning:
 		return
-	if food > needed_food:
+	if can_lay_egg():
+		can_respawn = true
 		is_respawning = true
 		food -= needed_food
 		await get_tree().create_timer(2.0).timeout
 		respawn_location = location
-		can_respawn = true
 		number_of_generations_survived += 1
 		is_respawning = false
 		emit_signal("respawned")
