@@ -133,6 +133,7 @@ func generate_food():
 func remove_all_food():
 	if list_of_food:
 		for child in list_of_food:
+			if child:
 				child.queue_free()
 		list_of_food.clear()	
 		

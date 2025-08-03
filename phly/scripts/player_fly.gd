@@ -66,7 +66,7 @@ func _handleMovement(delta) -> void:
 		if (!is_on_floor()):
 			velocity += Vector3.DOWN * GRAVITY * delta;
 
-	print(velocity.length())
+	# print(velocity.length())
 
 	velocity.limit_length(MAX_SPEED);
 	if not GameState.is_caught_in_web:
@@ -192,11 +192,11 @@ func _process(delta):
 
 
 func _on_eat_pressed(delta: float):
-	print("eat")
+	# print("eat")
 	GameState.food += 10 * delta
 
 
 func _on_kill_area_body_entered(body: Node3D) -> void:
 	if body.is_in_group("enemies"):
-		print("killed by spider!")
+		# print("killed by spider!")
 		GameState.handle_death()
