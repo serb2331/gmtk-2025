@@ -13,8 +13,6 @@ radius = 0.02
 height = 0.07
 
 [node name="Player" type="CharacterBody3D"]
-collision_layer = 2
-collision_mask = 3
 script = ExtResource("1_cowcd")
 
 [node name="FlyModel" parent="." instance=ExtResource("2_ybtsn")]
