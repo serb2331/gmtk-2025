@@ -19,5 +19,5 @@ func decrement_health_every_second(delta: float):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	decrement_health_every_second(delta)
-	text = str(GameState.health)
+	text = str(max(GameState.health,0))
 		
