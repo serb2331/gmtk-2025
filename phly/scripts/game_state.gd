@@ -1,6 +1,8 @@
 extends Node
 
 signal respawned
+signal play_wohoo
+signal play_respawn
 
 var player: CharacterBody3D
 var health: int
@@ -48,6 +50,7 @@ func set_respawn(location):
 	if is_respawning:
 		return
 	if can_lay_egg()	:
+		emit_signal("play_wohoo")
 		can_respawn = true
 		is_respawning = true
 		food -= needed_food
@@ -85,6 +88,7 @@ func handle_death():
 		if death_sound:
 			death_sound.play()
 		await get_tree().create_timer(2.0).timeout
+		emit_signal("play_respawn")
 		initialize_health()
 		initialize_food()
 		player.global_position = respawn_location
