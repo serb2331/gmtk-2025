@@ -143,7 +143,8 @@ func _physics_process(delta: float) -> void:
 			if Input.is_action_pressed("eat"):
 				_on_eat_pressed(delta)
 		else:
-			Swatter.visible = false
+			is_in_swatter_animation = false
+			Swatter.stop_swatter_animation()
 		if Input.is_action_just_pressed("respawn"):
 			GameState.set_respawn(global_transform.origin)
 		if velocity.y != 0:

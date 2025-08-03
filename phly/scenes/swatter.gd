@@ -11,6 +11,11 @@ func start_swatter_animation():
 	await get_tree().create_timer(TIME_BEFORE_ANIMATION_STARTS).timeout
 	swatter_animation.play("swatter_anim/A_Hand_Swat")
 
+
+func stop_swatter_animation():
+	self.visible = false
+	swatter_animation.play("swatter_anim/none")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	SwatterRig.animation_finised.connect(on_animation_finished)
