@@ -14,6 +14,8 @@ var is_dying: bool
 var respawn_location: Vector3
 var is_caught_in_web: bool
 var number_of_generations_survived: int
+var room: Node3D
+var last_egg: Node3D
 
 
 const DECREMENT_VALUE = 1.0
@@ -24,6 +26,9 @@ const respawning_treshold := [60,80,90,80]
 const MIN_HEALTH = 0
 const has_descendant = false
 var death_sound: AudioStreamPlayer
+
+func set_room(room_scene: Node3D):
+	room = room_scene
 
 func initialize_health():
 	health = starting_health_options[randi() % starting_health_options.size()]
@@ -42,14 +47,24 @@ func can_lay_egg():
 func set_respawn(location):
 	if is_respawning:
 		return
-	if can_lay_egg():
+	if can_lay_egg()	:
 		can_respawn = true
 		is_respawning = true
 		food -= needed_food
 		await get_tree().create_timer(2.0).timeout
 		respawn_location = location
-		number_of_generations_survived += 1
+		var egg_scene = load("res://assets/player/sm_egg.tscn")
+		if egg_scene:
+			remove_egg()
+			var egg = egg_scene.instantiate()
+			egg.global_transform.origin = location
+			room.add_child(egg)
+			last_egg = egg
 		is_respawning = false
+
+func remove_egg():
+	if last_egg:
+		last_egg.queue_free()
 
 func decrement_health():
 	health -= DECREMENT_VALUE
@@ -76,11 +91,14 @@ func handle_death():
 		is_dying = false
 		is_caught_in_web = false
 		FoodGenerator.generate_food()
+		remove_egg()
+		number_of_generations_survived += 1
 		emit_signal("respawned")
 	else:
 		if death_sound:
 			death_sound.play()
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		remove_egg()
 		get_tree().change_scene_to_file("res://scenes/end_game_screen.tscn")
 	
 
