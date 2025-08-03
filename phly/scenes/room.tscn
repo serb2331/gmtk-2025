@@ -1,0 +1,77 @@
+[gd_scene load_steps=14 format=3 uid="uid://browrbdltohk1"]
+
+[ext_resource type="Script" uid="uid://coo0j4chw3x46" path="res://scripts/room.gd" id="1_4o3f6"]
+[ext_resource type="PackedScene" uid="uid://sggjfsxhpfgq" path="res://scenes/player_fly.tscn" id="1_88gup"]
+[ext_resource type="PackedScene" uid="uid://cfy70qk473650" path="res://scenes/kitchen_environment.tscn" id="2_bisa2"]
+[ext_resource type="Environment" uid="uid://dgohufk4uumqy" path="res://scene/WorldEnvironment.tres" id="3_01y1d"]
+[ext_resource type="PackedScene" uid="uid://b1msn131f82fi" path="res://scenes/food.tscn" id="3_4o3f6"]
+[ext_resource type="PackedScene" uid="uid://dcsdewssu0eov" path="res://scenes/ui_layer.tscn" id="5_ka7wq"]
+[ext_resource type="AudioStream" uid="uid://dsullup1dunb0" path="res://assets/music/ambient/ambient1.wav" id="6_x5k2b"]
+[ext_resource type="PackedScene" uid="uid://bl65pjc431inu" path="res://scenes/spider.tscn" id="8_42v8c"]
+[ext_resource type="PackedScene" uid="uid://xlynwwqfbyu8" path="res://scenes/clutter_objects/envi_clutter.tscn" id="9_ybpoa"]
+[ext_resource type="PackedScene" uid="uid://bo5j04m650c51" path="res://scenes/spider_web.tscn" id="10_qtoah"]
+[ext_resource type="PackedScene" uid="uid://y6boexhaiikj" path="res://assets/player/sm_egg.tscn" id="11_eom3m"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bisa2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bisa2"]
+size = Vector3(10.625, 1, 14.6358)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_4o3f6")
+food_scene = ExtResource("3_4o3f6")
+spider_scene = ExtResource("8_42v8c")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("3_01y1d")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.0461853, 0.497862, 0, 0.995725, 0.0923706, -0.5, 0.0799953, -0.862323, 0, 0, 0)
+light_color = Color(0.696525, 0.627364, 0.529807, 1)
+light_energy = 3.262
+shadow_enabled = true
+sky_mode = 1
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.96936, -0.796352)
+light_color = Color(0.812213, 0.688509, 0.555235, 1)
+light_energy = 6.062
+light_volumetric_fog_energy = 1.8
+spot_angle = 55.0788
+
+[node name="Player" parent="." instance=ExtResource("1_88gup")]
+transform = Transform3D(0.424168, 0, -0.905584, 0, 1, 0, 0.905584, 0, 0.424168, -0.59274, 0.584046, -0.414003)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+disable_mode = 1
+physics_material_override = SubResource("PhysicsMaterial_bisa2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.827148, 0.283137, -0.706474)
+shape = SubResource("BoxShape3D_bisa2")
+
+[node name="Kitchen_Environment2" parent="." instance=ExtResource("2_bisa2")]
+
+[node name="CanvasLayer" parent="." instance=ExtResource("5_ka7wq")]
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_x5k2b")
+volume_db = -12.0
+autoplay = true
+
+[node name="Envi_Clutter" parent="." instance=ExtResource("9_ybpoa")]
+
+[node name="SpiderWeb4" parent="." instance=ExtResource("10_qtoah")]
+transform = Transform3D(0.576809, 0, 0.554339, 0, 0.8, 0, -0.554339, 0, 0.576809, -0.897947, 0.00196372, -1.22082)
+
+[node name="SpiderWeb3" parent="." instance=ExtResource("10_qtoah")]
+transform = Transform3D(1.11369, 0, 1.11369, 0, 1.575, 0, -1.11369, 0, 1.11369, -1.36922, 0.431826, -0.153349)
+
+[node name="SpiderWeb2" parent="." instance=ExtResource("10_qtoah")]
+transform = Transform3D(-1.59099, 0, -1.59099, 0, 2.25, 0, 1.59099, 0, -1.59099, 1.32789, -0.0164901, 0.367773)
+
+[node name="SpiderWeb" parent="." instance=ExtResource("10_qtoah")]
+transform = Transform3D(-1.06066, 0, 1.06066, 0, 1.5, 0, -1.06066, 0, -1.06066, -1.35152, 0.0315363, -0.603005)
+
+[node name="SM_Egg" parent="." instance=ExtResource("11_eom3m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2919, 0.849447, -0.973687)
