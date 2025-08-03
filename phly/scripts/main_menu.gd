@@ -2,15 +2,22 @@ extends Control
 
 @onready var button_hover = $ButtonHoverSound
 @onready var button_click = $ButtonClickSound
+@onready var CreditsPanel = $CreditsPanelButton
+@onready var HowToPlayPanel = $HowToPlayPanelButton
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	CreditsPanel.visible=false
+	HowToPlayPanel.visible=false
+	
+func testEsc():
+	if Input.is_action_just_pressed("Escape"):
+		CreditsPanel.visible=false
+		HowToPlayPanel.visible=false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	testEsc()
 
 
 func _on_button_pressed() -> void:
@@ -24,13 +31,21 @@ func _on_exit_button_pressed() -> void:
 
 
 func _on_options_button_pressed() -> void:
-	print("opening options")
-	pass # Replace with function body.
+	print("opening how to play")
+	HowToPlayPanel.visible=true
 
 
 func _on_credits_button_pressed() -> void:
-	pass # Replace with function body.
+	CreditsPanel.visible=true
 
 
 func _on_mouse_entered() -> void:
 	button_hover.play()
+
+
+func _on_how_to_play_button_pressed() -> void:
+	HowToPlayPanel.visible=false
+
+
+func _on_credits_panel_button_pressed() -> void:
+	CreditsPanel.visible=false

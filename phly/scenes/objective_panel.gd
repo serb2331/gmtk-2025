@@ -2,8 +2,8 @@ extends Panel
 
 
 var FIND_FOOD_OBJECTIVE_TEXT = "Objective | Find food to gain energy"
-var EAT_FOOD_OBJECTIVE_TEXT = "Objective | Press Z to eat food"
-var REPRODUCE_OBJECTIVE_TEXT = "Objective | Press X to lay egg"
+var EAT_FOOD_OBJECTIVE_TEXT = "Objective | Press E to eat food"
+var REPRODUCE_OBJECTIVE_TEXT = "Objective | Press Q to lay egg"
 
 @onready var label = $Label
 # Called when the node enters the scene tree for the first time.
