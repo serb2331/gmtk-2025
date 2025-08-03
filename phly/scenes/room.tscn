@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://browrbdltohk1"]
 
-[ext_resource type="Script" uid="uid://coo0j4chw3x46" path="res://scripts/room.gd" id="1_4o3f6"]
+[ext_resource type="Script" path="res://scripts/room.gd" id="1_4o3f6"]
 [ext_resource type="PackedScene" uid="uid://sggjfsxhpfgq" path="res://scenes/player_fly.tscn" id="1_88gup"]
 [ext_resource type="PackedScene" uid="uid://cfy70qk473650" path="res://scenes/kitchen_environment.tscn" id="2_bisa2"]
 [ext_resource type="Environment" uid="uid://dgohufk4uumqy" path="res://scene/WorldEnvironment.tres" id="3_01y1d"]
@@ -8,9 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://dcsdewssu0eov" path="res://scenes/ui_layer.tscn" id="5_ka7wq"]
 [ext_resource type="AudioStream" uid="uid://dsullup1dunb0" path="res://assets/music/ambient/ambient1.wav" id="6_x5k2b"]
 [ext_resource type="PackedScene" uid="uid://bl65pjc431inu" path="res://scenes/spider.tscn" id="8_42v8c"]
-[ext_resource type="PackedScene" uid="uid://xlynwwqfbyu8" path="res://scenes/clutter_objects/envi_clutter.tscn" id="9_ybpoa"]
 [ext_resource type="PackedScene" uid="uid://bo5j04m650c51" path="res://scenes/spider_web.tscn" id="10_qtoah"]
-[ext_resource type="PackedScene" uid="uid://y6boexhaiikj" path="res://assets/player/sm_egg.tscn" id="11_eom3m"]
+[ext_resource type="PackedScene" path="res://assets/player/sm_egg.tscn" id="11_eom3m"]
+[ext_resource type="PackedScene" uid="uid://1ym5xt57led5" path="res://assets/envi_clutter.tscn" id="11_tk5fv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bisa2"]
 
@@ -59,8 +59,6 @@ stream = ExtResource("6_x5k2b")
 volume_db = -12.0
 autoplay = true
 
-[node name="Envi_Clutter" parent="." instance=ExtResource("9_ybpoa")]
-
 [node name="SpiderWeb4" parent="." instance=ExtResource("10_qtoah")]
 transform = Transform3D(0.576809, 0, 0.554339, 0, 0.8, 0, -0.554339, 0, 0.576809, -0.897947, 0.00196372, -1.22082)
 
@@ -75,3 +73,5 @@ transform = Transform3D(-1.06066, 0, 1.06066, 0, 1.5, 0, -1.06066, 0, -1.06066, 
 
 [node name="SM_Egg" parent="." instance=ExtResource("11_eom3m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2919, 0.849447, -0.973687)
+
+[node name="Envi_Clutter" parent="." instance=ExtResource("11_tk5fv")]
