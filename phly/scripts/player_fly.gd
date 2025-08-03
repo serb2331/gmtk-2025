@@ -16,22 +16,27 @@ const YAW_THRESHOLD = deg_to_rad(0.5)
 
 @onready var FlyingSound : AudioStreamPlayer = $FlyingSound
 @onready var WalkingSound : AudioStreamPlayer = $WalkingSound
+@onready var Swatter : Node3D = $Swatter
+@onready var swatter_animation: AnimationPlayer = $Swatter/Hand_Rig/AnimationPlayer
+const CAMERA_SENSITIVITY = 0.01
 
 
 var _true_model_yaw := 0.0
 var _true_model_pitch := 0.0
 var _last_camera_yaw := 0.0
 
+var is_in_swatter_animation
+	
 const CAMERA_PITCH_OFFSET = deg_to_rad(30);
 const CAMERA_YAW_OFFSET = deg_to_rad(180);
 
 func _rotateCamera() -> void:
 	CameraSpringArm.rotation.x = lerp_angle(CameraSpringArm.rotation.x, -(_true_model_pitch + CAMERA_PITCH_OFFSET), 0.1);
 	CameraSpringArm.rotation.y = lerp_angle(CameraSpringArm.rotation.y, _true_model_yaw + CAMERA_YAW_OFFSET, 0.1);
-	
-func _rotateModel() -> void:
-	Model.rotation.x = _true_model_pitch;
-	Model.rotation.y = _true_model_yaw;
+
+func _rotateModel(model) -> void:
+	model.rotation.x = _true_model_pitch;
+	model.rotation.y = _true_model_yaw;
 
 func _handleMovement(delta) -> void:
 
@@ -105,6 +110,15 @@ func _ready() -> void:
 	GameState.player = self
 	_last_camera_yaw = _true_model_yaw
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Swatter.visible = false
+	is_in_swatter_animation = false
+	Swatter.animation_finished.connect(swatter_animation_finished)
+	
+func swatter_animation_finished():
+	print("animation finished 2!")
+	if GameState.inside_food:
+		GameState.handle_death()
+	is_in_swatter_animation = false
 
 func _physics_process(delta: float) -> void:
 	if !GameState.is_respawning && !GameState.is_dying:
@@ -112,13 +126,19 @@ func _physics_process(delta: float) -> void:
 			_true_model_pitch = 0
 
 		_rotateCamera()
-		_rotateModel()
+		_rotateModel(Model)
+		_rotateModel(Swatter)
 
 		_handleMovement(delta);
 		_decideAndApplyAnimation();	
 		if GameState.inside_food:
+			if not is_in_swatter_animation:
+				Swatter.start_swatter_animation()
 			if Input.is_action_pressed("eat"):
 				_on_eat_pressed(delta)
+		else:
+			is_in_swatter_animation = false
+			Swatter.stop_swatter_animation()
 		if Input.is_action_just_pressed("respawn"):
 			GameState.set_respawn(global_transform.origin)
 		if velocity.y != 0:
