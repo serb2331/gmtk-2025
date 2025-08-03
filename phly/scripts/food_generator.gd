@@ -134,7 +134,7 @@ func generate_food():
 func remove_all_food():
 	for child in list_of_food:
 			child.queue_free()
-	list_of_food.clear()
+	list_of_food.clear()	
 		
 func set_food_props(parentNode: Node, food: PackedScene):
 	parent = parentNode
