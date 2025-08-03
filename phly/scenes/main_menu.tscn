@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://c5r27jnxhrw7k"]
 
 [ext_resource type="Script" uid="uid://biqsk1bdq8k80" path="res://scripts/main_menu.gd" id="1_06t4h"]
-[ext_resource type="FontFile" uid="uid://dbypm7vmyvbs7" path="res://fonts/ferrum.otf" id="2_7vrkn"]
 [ext_resource type="Texture2D" uid="uid://bga5pmspuulh8" path="res://assets/images/background-game1.png" id="2_fu7sn"]
+[ext_resource type="FontFile" uid="uid://vskax0le4ltp" path="res://fonts/BRLNSDB.TTF" id="4_wu84c"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jix8l"]
 texture = ExtResource("2_fu7sn")
@@ -53,7 +53,7 @@ offset_right = 576.5
 offset_bottom = -130.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("2_7vrkn")
+theme_override_fonts/font = ExtResource("4_wu84c")
 theme_override_font_sizes/font_size = 64
 text = "Bzzz the loop"
 horizontal_alignment = 1
@@ -79,7 +79,7 @@ size_flags_vertical = 3
 focus_mode = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/h_separation = 0
-theme_override_fonts/font = ExtResource("2_7vrkn")
+theme_override_fonts/font = ExtResource("4_wu84c")
 theme_override_font_sizes/font_size = 26
 shortcut = SubResource("Shortcut_fu7sn")
 text = "Start"
@@ -89,7 +89,7 @@ layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_7vrkn")
+theme_override_fonts/font = ExtResource("4_wu84c")
 theme_override_font_sizes/font_size = 26
 shortcut = SubResource("Shortcut_jix8l")
 text = "Options"
@@ -99,7 +99,7 @@ layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_7vrkn")
+theme_override_fonts/font = ExtResource("4_wu84c")
 theme_override_font_sizes/font_size = 26
 text = "Credits"
 
@@ -108,7 +108,7 @@ layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_7vrkn")
+theme_override_fonts/font = ExtResource("4_wu84c")
 theme_override_font_sizes/font_size = 26
 text = "Exit"
 
