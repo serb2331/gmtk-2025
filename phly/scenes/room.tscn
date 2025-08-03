@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://browrbdltohk1"]
+[gd_scene load_steps=15 format=3 uid="uid://browrbdltohk1"]
 
 [ext_resource type="Script" uid="uid://coo0j4chw3x46" path="res://scripts/room.gd" id="1_4o3f6"]
 [ext_resource type="PackedScene" uid="uid://sggjfsxhpfgq" path="res://scenes/player_fly.tscn" id="1_88gup"]
@@ -10,7 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://bl65pjc431inu" path="res://scenes/spider.tscn" id="8_42v8c"]
 [ext_resource type="PackedScene" uid="uid://bo5j04m650c51" path="res://scenes/spider_web.tscn" id="10_qtoah"]
 [ext_resource type="PackedScene" uid="uid://y6boexhaiikj" path="res://assets/player/sm_egg.tscn" id="11_eom3m"]
-[ext_resource type="PackedScene" path="res://assets/envi_clutter.tscn" id="11_tk5fv"]
+[ext_resource type="PackedScene" uid="uid://1ym5xt57led5" path="res://assets/envi_clutter.tscn" id="11_tk5fv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eom3m"]
+size = Vector3(1.20752, 1.33325, 0.330109)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bisa2"]
 
@@ -41,6 +44,12 @@ spot_angle = 55.0788
 
 [node name="Player" parent="." instance=ExtResource("1_88gup")]
 transform = Transform3D(0.424168, 0, -0.905584, 0, 1, 0, 0.905584, 0, 0.424168, -0.59274, 0.584046, -0.414003)
+
+[node name="Static" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Static"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10376, 1.59028, -2.21526)
+shape = SubResource("BoxShape3D_eom3m")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 disable_mode = 1

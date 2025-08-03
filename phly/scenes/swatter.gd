@@ -7,9 +7,9 @@ const TIME_BEFORE_ANIMATION_STARTS = 4.0
 signal animation_finished
 
 func start_swatter_animation():
-	self.visible = true
 	await get_tree().create_timer(TIME_BEFORE_ANIMATION_STARTS).timeout
 	swatter_animation.play("swatter_anim/A_Hand_Swat")
+	self.visible = true
 
 
 func stop_swatter_animation():

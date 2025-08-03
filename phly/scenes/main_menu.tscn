@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://dxogfeyvr0kcu" path="res://assets/music/menu-sound/ui click.wav" id="6_oa1go"]
 [ext_resource type="AudioStream" uid="uid://psfmlj2ysh8q" path="res://assets/music/menu-sound/ui hover.wav" id="6_rtw2f"]
 [ext_resource type="Texture2D" uid="uid://b72qnweqc8uj3" path="res://assets/images/Credits.jpg" id="8_tbmy8"]
-[ext_resource type="Texture2D" uid="uid://2wqurn8eelrv" path="res://assets/images/How to play.jpg" id="9_jk1qb"]
+[ext_resource type="Texture2D" uid="uid://bffruw6r6wc3a" path="res://assets/images/How to play.jpg" id="9_jk1qb"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jix8l"]
 texture = ExtResource("2_wu84c")
