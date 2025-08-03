@@ -94,6 +94,7 @@ func handle_death():
 		player.global_position = respawn_location
 		is_dying = false
 		is_caught_in_web = false
+		FoodGenerator.removeall_food()
 		FoodGenerator.generate_food()
 		remove_egg()
 		number_of_generations_survived += 1
