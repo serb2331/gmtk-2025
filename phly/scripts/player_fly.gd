@@ -18,10 +18,7 @@ const YAW_THRESHOLD = deg_to_rad(0.5)
 @onready var WalkingSound : AudioStreamPlayer = $WalkingSound
 @onready var Swatter : Node3D = $Swatter
 @onready var swatter_animation: AnimationPlayer = $Swatter/Hand_Rig/AnimationPlayer
-const MIN_PITCH = deg_to_rad(-(ROTATION_MAX_DEGREE))
-const MAX_PITCH = deg_to_rad(ROTATION_MAX_DEGREE)
 const CAMERA_SENSITIVITY = 0.01
-const YAW_THRESHOLD = deg_to_rad(0.5)
 
 
 var _true_model_yaw := 0.0
@@ -38,8 +35,8 @@ func _rotateCamera() -> void:
 	CameraSpringArm.rotation.y = lerp_angle(CameraSpringArm.rotation.y, _true_model_yaw + CAMERA_YAW_OFFSET, 0.1);
 
 func _rotateModel(model) -> void:
-	model.rotation.x = -_target_camera_pitch;
-	model.rotation.y = _target_camera_yaw - PI;
+	model.rotation.x = _true_model_pitch;
+	model.rotation.y = _true_model_yaw;
 
 func _handleMovement(delta) -> void:
 
@@ -131,8 +128,6 @@ func _physics_process(delta: float) -> void:
 		_rotateCamera()
 		_rotateModel(Model)
 		_rotateModel(Swatter)
-		if is_on_floor():
-			_target_camera_pitch = deg_to_rad(-15)
 
 		_handleMovement(delta);
 		_decideAndApplyAnimation();	
