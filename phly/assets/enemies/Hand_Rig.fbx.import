@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bi2gt354n8udu"
+uid="uid://cqv1pnnxpox8"
 path="res://.godot/imported/Hand_Rig.fbx-6689fad7c6b62b5b6aeaff09ee04a31c.scn"
 
 [deps]
@@ -32,7 +32,14 @@ animation/trimming=true
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
-_subresources={}
+_subresources={
+"materials": {
+"M_Assetpack_03": {
+"use_external/enabled": true,
+"use_external/path": "uid://cumskb1gl3f6h"
+}
+}
+}
 fbx/importer=0
 fbx/allow_geometry_helper_nodes=false
 fbx/embedded_image_handling=1
