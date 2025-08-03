@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://baoc55o3it7od"
+path="res://.godot/imported/ui warning.wav-7153c653d73939af01b0c4c9e80d2986.sample"
+
+[deps]
+
+source_file="res://assets/music/menu-sound/ui warning.wav"
+dest_files=["res://.godot/imported/ui warning.wav-7153c653d73939af01b0c4c9e80d2986.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
