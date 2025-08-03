@@ -10,10 +10,10 @@
 [ext_resource type="Script" uid="uid://ctmbl5wh806o" path="res://scripts/life_text.gd" id="6_rkduv"]
 [ext_resource type="Texture2D" uid="uid://c2gtwe05dasih" path="res://assets/images/Death Icon.png" id="7_yplav"]
 [ext_resource type="Script" uid="uid://w3vacrwg08cy" path="res://scenes/objective_panel.gd" id="10_w058a"]
-[ext_resource type="VideoStream" uid="uid://b3rxe0yadfflp" path="res://assets/cutscenes/Respawn (1).ogv" id="11_l76gi"]
-[ext_resource type="Script" uid="uid://bf3gd181qbmwk" path="res://scenes/video_stream_player.gd" id="11_tii0l"]
-[ext_resource type="VideoStream" uid="uid://yj7hxk85c7r4" path="res://assets/cutscenes/Woohoo (1).ogv" id="11_xt7ap"]
-[ext_resource type="Script" uid="uid://7p1nmrjqb3jn" path="res://scenes/respawn_cutscene.gd" id="12_sahi7"]
+[ext_resource type="VideoStream" path="res://assets/cutscenes/Respawn (1).ogv" id="11_l76gi"]
+[ext_resource type="Script" path="res://scenes/video_stream_player.gd" id="11_tii0l"]
+[ext_resource type="VideoStream" path="res://assets/cutscenes/Woohoo (1).ogv" id="11_xt7ap"]
+[ext_resource type="Script" path="res://scenes/respawn_cutscene.gd" id="12_sahi7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ibxbq"]
 bg_color = Color(0, 0, 0, 0.588235)

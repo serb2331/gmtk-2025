@@ -2,6 +2,7 @@ extends Node
 
 var parent: Node3D
 var food_scene: PackedScene
+var list_of_food: Array
 
 const MIN_FOOD_DISTANCE = 0.3
 const EDGE_OFFSET = 0.2
@@ -121,17 +122,19 @@ func generate_food():
 				var food = food_scene.instantiate()
 				var food_type = get_random_food()
 				food.set_type(food_type)
+				print(food.name)
 				food.global_transform.origin = pos
 				if food.has_method("set_size"):
 					food.set_size(randi_range(1, 5))
 				parent.add_child(food)
+				list_of_food.append(food)
 				placed = true
 				break
 
 func remove_all_food():
-	for child in parent.get_children():
-		if child.name == "Food":
+	for child in list_of_food:
 			child.queue_free()
+	list_of_food.clear()
 		
 func set_food_props(parentNode: Node, food: PackedScene):
 	parent = parentNode

@@ -101,6 +101,7 @@ func handle_death():
 	else:
 		if death_sound:
 			death_sound.play()
+		FoodGenerator.generate_food()
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		remove_egg()
 		get_tree().change_scene_to_file("res://scenes/end_game_screen.tscn")
