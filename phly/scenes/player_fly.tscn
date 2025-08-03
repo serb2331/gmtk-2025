@@ -7,32 +7,21 @@
 [ext_resource type="PackedScene" uid="uid://cqjjcldihiwdy" path="res://scenes/swatter.tscn" id="5_y55bh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ybtsn"]
-size = Vector3(0.001, 0.0110449, 0.0156421)
+size = Vector3(0.001, 0.0137707, 0.0156421)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7lsi5"]
 radius = 0.02
 height = 0.07
 
-[node name="CharacterBody3D" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_cowcd")
 
-[node name="Fly" parent="." instance=ExtResource("2_ybtsn")]
+[node name="FlyModel" parent="." instance=ExtResource("2_ybtsn")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0.000636049, 0.017937, -0.00723571)
+[node name="PlayerCollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0.000636049, 0.0156847, -0.00723571)
 shape = SubResource("BoxShape3D_ybtsn")
-
-[node name="TwistPivot" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
-
-[node name="PitchPivot" type="Node3D" parent="TwistPivot"]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
-
-[node name="Camera3D" type="Camera3D" parent="TwistPivot/PitchPivot"]
-transform = Transform3D(1, -7.10543e-15, 7.10543e-15, 1.42109e-14, 1, 0, -1.42109e-14, 0, 1, -1.83251e-09, 0.0279256, 0.0982817)
-current = true
-near = 0.01
 
 [node name="FlyingSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_flying")
@@ -47,7 +36,16 @@ volume_db = -2.0
 [node name="KillArea" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="KillArea"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.0193183, -0.00464746)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.0142566, -0.00464746)
 shape = SubResource("CapsuleShape3D_7lsi5")
+
+[node name="CameraSpringArm" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0856003, -0.00972073)
+spring_length = 0.15
+margin = 0.1
+
+[node name="Camera" type="Camera3D" parent="CameraSpringArm"]
+current = true
+near = 0.01
 
 [connection signal="body_entered" from="KillArea" to="." method="_on_kill_area_body_entered"]

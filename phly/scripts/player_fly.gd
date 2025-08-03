@@ -1,24 +1,19 @@
 extends CharacterBody3D
 
-# i guess use m/s for speed and such(?)
-
-const SPEED = 18
-const FLY_VELOCITY = 0.2
-
-const ROTATION_MAX_DEGREE = 50	
-
-const GRAVITY_MULTIPLIER_WHEN_FLYING = 0.010
 const ACCELERATION = 8
 const MAX_SPEED = 1
 var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-@onready var TwistPivot : Node3D = $TwistPivot
-@onready var PitchPivot : Node3D = $TwistPivot/PitchPivot
-@onready var Camera := $TwistPivot/PitchPivot/Camera3D
-@onready var Model : Node3D = $Fly
-@onready var animation_tree: AnimationTree = $Fly/AnimationTree
-const ROTATION_SPEED = 90.0  
-@onready var FlyAnimation : AnimationPlayer = $Fly/AnimationPlayer
+@onready var CameraSpringArm := $CameraSpringArm
+@onready var Camera := $CameraSpringArm/Camera
+const MOUSE_SENSITIVITY = 0.01
+const YAW_THRESHOLD = deg_to_rad(0.5)
+
+@onready var Model : Node3D = $FlyModel
+
+@onready var animation_tree: AnimationTree = $FlyModel/AnimationTree
+@onready var FlyAnimation : AnimationPlayer = $FlyModel/AnimationPlayer
+
 @onready var FlyingSound : AudioStreamPlayer = $FlyingSound
 @onready var WalkingSound : AudioStreamPlayer = $WalkingSound
 @onready var Swatter : Node3D = $Swatter
@@ -28,17 +23,20 @@ const MAX_PITCH = deg_to_rad(ROTATION_MAX_DEGREE)
 const CAMERA_SENSITIVITY = 0.01
 const YAW_THRESHOLD = deg_to_rad(0.5)
 
-var _target_camera_yaw := deg_to_rad(180)
-var _target_camera_pitch := deg_to_rad(-45)
+
+var _true_model_yaw := 0.0
+var _true_model_pitch := 0.0
 var _last_camera_yaw := 0.0
 
 var is_in_swatter_animation
 	
+const CAMERA_PITCH_OFFSET = deg_to_rad(30);
+const CAMERA_YAW_OFFSET = deg_to_rad(180);
 
 func _rotateCamera() -> void:
-	TwistPivot.rotation.y = lerp_angle(TwistPivot.rotation.y, _target_camera_yaw, 0.1);
-	PitchPivot.rotation.x = lerp_angle(PitchPivot.rotation.x, _target_camera_pitch, 0.1);
-	
+	CameraSpringArm.rotation.x = lerp_angle(CameraSpringArm.rotation.x, -(_true_model_pitch + CAMERA_PITCH_OFFSET), 0.1);
+	CameraSpringArm.rotation.y = lerp_angle(CameraSpringArm.rotation.y, _true_model_yaw + CAMERA_YAW_OFFSET, 0.1);
+
 func _rotateModel(model) -> void:
 	model.rotation.x = -_target_camera_pitch;
 	model.rotation.y = _target_camera_yaw - PI;
@@ -50,15 +48,15 @@ func _handleMovement(delta) -> void:
 
 	# Move forward (W) — horizontal plane only
 	if Input.is_action_pressed("move_forward"):
-		_move_direction -= Camera.global_transform.basis.z
+		_move_direction += Model.global_transform.basis.z
 		_is_moving = true;
 
 	if Input.is_action_pressed("move_back"):
-		_move_direction += Camera.global_transform.basis.z
+		_move_direction -= Model.global_transform.basis.z
 		_is_moving = true;
 
 	if Input.is_action_pressed("fly"):
-		_move_direction += Camera.global_transform.basis.y
+		_move_direction += Model.global_transform.basis.y
 		_is_moving = true;
 
 	###############
@@ -66,7 +64,7 @@ func _handleMovement(delta) -> void:
 	velocity = lerp(velocity, Vector3.ZERO, 0.1);
 
 	if (_is_moving):
-		velocity += _move_direction * ACCELERATION * delta;
+		velocity += _move_direction.normalized() * ACCELERATION * delta;
 	else:
 		if (!is_on_floor()):
 			velocity += Vector3.DOWN * GRAVITY * delta;
@@ -78,8 +76,8 @@ func _handleMovement(delta) -> void:
 		move_and_slide()
 
 func _decideAndApplyAnimation() -> void:
-	var yaw_diff = _target_camera_yaw - _last_camera_yaw
-	_last_camera_yaw = _target_camera_yaw
+	var yaw_diff = _true_model_yaw - _last_camera_yaw
+	_last_camera_yaw = _true_model_yaw
 
 	var desired_animation := "born"
 	
@@ -113,7 +111,7 @@ func _decideAndApplyAnimation() -> void:
 
 func _ready() -> void:
 	GameState.player = self
-	_last_camera_yaw = _target_camera_yaw
+	_last_camera_yaw = _true_model_yaw
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Swatter.visible = false
 	is_in_swatter_animation = false
@@ -126,9 +124,10 @@ func swatter_animation_finished():
 	is_in_swatter_animation = false
 
 func _physics_process(delta: float) -> void:
-	# print("CAMERA - ", Camera.global_transform.basis.y);
-	# print("PITCH PIVOT - ", PitchPivot.global_transform.basis.y);
 	if !GameState.is_respawning && !GameState.is_dying:
+		if is_on_floor():
+			_true_model_pitch = 0
+
 		_rotateCamera()
 		_rotateModel(Model)
 		_rotateModel(Swatter)
@@ -168,36 +167,33 @@ func _unhandled_input(event: InputEvent) -> void:
 		var _yaw := 0.0
 		var _pitch := 0.0
 
-		_yaw = -event.relative.x * CAMERA_SENSITIVITY
-		_pitch = -event.relative.y * CAMERA_SENSITIVITY
+		_yaw = -event.relative.x * MOUSE_SENSITIVITY
+		_pitch = -event.relative.y * MOUSE_SENSITIVITY
 
-		print(_yaw, " ---- ", _pitch);
+		# print(_yaw, " ---- ", _pitch);
 
-		# TwistPivot.rotate_y(_yaw);
-		# PitchPivot.rotate_x(_pitch);
-
-		_target_camera_yaw += _yaw;
+		_true_model_yaw += _yaw;
 		if not is_on_floor():
-			_target_camera_pitch += _pitch
+			_true_model_pitch -= _pitch
 		else:
-			_target_camera_pitch = deg_to_rad(-15)
+			_true_model_pitch = deg_to_rad(0)
 
 func _process(delta):
 	var right_stick_x = Input.get_joy_axis(0, JOY_AXIS_RIGHT_X)
 	var right_stick_y = Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
 	
 	if abs(right_stick_x) > 0.1 or abs(right_stick_y) > 0.1:
-		var _yaw = -right_stick_x * CAMERA_SENSITIVITY * 200 * delta
-		var _pitch = -right_stick_y * CAMERA_SENSITIVITY * 200 * delta
+		var _yaw = -right_stick_x * MOUSE_SENSITIVITY * 200 * delta
+		var _pitch = -right_stick_y * MOUSE_SENSITIVITY * 200 * delta
 		
-		_target_camera_yaw += _yaw
+		_true_model_yaw += _yaw
 		if not is_on_floor():
-			_target_camera_pitch += _pitch
+			_true_model_pitch += _pitch
 		else:
-			_target_camera_pitch = deg_to_rad(-15)
+			_true_model_pitch = deg_to_rad(-15)
 	
-	if is_on_floor() and _target_camera_pitch != deg_to_rad(-15):
-		_target_camera_pitch = deg_to_rad(-15)
+	if is_on_floor() and _true_model_pitch != deg_to_rad(-15):
+		_true_model_pitch = deg_to_rad(-15)
 
 
 func _on_eat_pressed(delta: float):
