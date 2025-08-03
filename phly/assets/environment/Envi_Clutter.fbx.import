@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dhoptd3tntbth"
+uid="uid://dy81h417ji01t"
 path="res://.godot/imported/Envi_Clutter.fbx-5e6936c2f49879af0b58ed302385e6c8.scn"
 
 [deps]
@@ -37,6 +37,22 @@ _subresources={
 "M_Assetpack_03": {
 "use_external/enabled": true,
 "use_external/path": "uid://cumskb1gl3f6h"
+},
+"M_Assetpack_04": {
+"use_external/enabled": true,
+"use_external/path": "uid://dmlb8id4vy0pr"
+},
+"M_Assetpack_05": {
+"use_external/enabled": true,
+"use_external/path": "uid://dj7w0qrth6hv5"
+},
+"M_Assetpack_06": {
+"use_external/enabled": true,
+"use_external/path": "uid://tl0uvlio3w25"
+},
+"M_Assetpack_07": {
+"use_external/enabled": true,
+"use_external/path": "uid://bivnh66goxf3w"
 }
 }
 }
