@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://v4depdew5av1"]
+
+[ext_resource type="Texture2D" uid="uid://dr7c54vd0454i" path="res://assets/player/textures/M_Egg.jpg" id="1_52yg2"]
+
+[resource]
+albedo_texture = ExtResource("1_52yg2")
+roughness = 0.3
