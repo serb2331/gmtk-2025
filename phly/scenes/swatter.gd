@@ -3,10 +3,12 @@ extends Node3D
 @onready var SwatterRig: Node3D = $Hand_Rig
 @onready var swatter_animation: AnimationPlayer = $Hand_Rig/AnimationPlayer
 
+const TIME_BEFORE_ANIMATION_STARTS = 4.0
 signal animation_finished
 
 func start_swatter_animation():
 	self.visible = true
+	await get_tree().create_timer(TIME_BEFORE_ANIMATION_STARTS).timeout
 	swatter_animation.play("swatter_anim/A_Hand_Swat")
 
 # Called when the node enters the scene tree for the first time.
@@ -15,6 +17,7 @@ func _ready() -> void:
 
 func on_animation_finished():
 	emit_signal("animation_finished")
+	swatter_animation.seek(0, true)
 	swatter_animation.stop()
 	self.visible = false
 
