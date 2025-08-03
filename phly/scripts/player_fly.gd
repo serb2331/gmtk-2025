@@ -183,12 +183,12 @@ func _process(delta):
 		
 		_true_model_yaw += _yaw
 		if not is_on_floor():
-			_true_model_pitch += _pitch
+			_true_model_pitch -= _pitch
 		else:
-			_true_model_pitch = deg_to_rad(-15)
+			_true_model_pitch = deg_to_rad(0)
 	
-	if is_on_floor() and _true_model_pitch != deg_to_rad(-15):
-		_true_model_pitch = deg_to_rad(-15)
+	if is_on_floor() and _true_model_pitch != deg_to_rad(0):
+		_true_model_pitch = deg_to_rad(0)
 
 
 func _on_eat_pressed(delta: float):

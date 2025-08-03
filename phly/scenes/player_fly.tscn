@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://de1h3gx4jutl8" path="res://assets/player/fly_scene.tscn" id="2_ybtsn"]
 [ext_resource type="AudioStream" uid="uid://bol1y0vkplu42" path="res://assets/music/fly/wings-flap.wav" id="3_flying"]
 [ext_resource type="AudioStream" uid="uid://3snbpwnej183" path="res://assets/music/fly/walk.wav" id="4_walking"]
-[ext_resource type="PackedScene" uid="uid://cqjjcldihiwdy" path="res://scenes/swatter.tscn" id="5_y55bh"]
+[ext_resource type="PackedScene" path="res://scenes/swatter.tscn" id="5_y55bh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ybtsn"]
 size = Vector3(0.001, 0.0137707, 0.0156421)
