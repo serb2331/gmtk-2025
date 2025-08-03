@@ -111,7 +111,6 @@ func is_position_free(pos: Vector3, parent: Node) -> bool:
 	return true
 
 func generate_food():
-	remove_all_food()
 	var max_attempts = 20
 	for i in range(FOOD_COUNT):
 		var placed = false
