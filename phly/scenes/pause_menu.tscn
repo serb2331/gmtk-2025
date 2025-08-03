@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bigra2o72flyr" path="res://scripts/pause_menu.gd" id="1_kukqi"]
 [ext_resource type="Texture2D" uid="uid://cein560g8c5jq" path="res://assets/player/textures/M_Wings_Roughness.jpg" id="2_5d2l8"]
-[ext_resource type="FontFile" uid="uid://dbypm7vmyvbs7" path="res://fonts/ferrum.otf" id="3_7l7mv"]
+[ext_resource type="FontFile" uid="uid://vskax0le4ltp" path="res://fonts/BRLNSDB.TTF" id="4_5d2l8"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p81d2"]
 texture = ExtResource("2_5d2l8")
@@ -153,24 +153,24 @@ theme_override_constants/separation = 12
 
 [node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_7l7mv")
+theme_override_fonts/font = ExtResource("4_5d2l8")
 theme_override_font_sizes/font_size = 36
 text = "Menu"
 horizontal_alignment = 1
 
 [node name="ResumeButton" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_7l7mv")
+theme_override_fonts/font = ExtResource("4_5d2l8")
 text = "Resume"
 
 [node name="RestartButton" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_7l7mv")
+theme_override_fonts/font = ExtResource("4_5d2l8")
 text = "Restart"
 
 [node name="QuitButton" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_7l7mv")
+theme_override_fonts/font = ExtResource("4_5d2l8")
 text = "Quit"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

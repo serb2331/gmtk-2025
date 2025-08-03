@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dcsdewssu0eov"]
+[gd_scene load_steps=18 format=3 uid="uid://dcsdewssu0eov"]
 
 [ext_resource type="Script" uid="uid://dg5pkb4codc4x" path="res://scripts/food_bar.gd" id="1_ibxbq"]
 [ext_resource type="Script" uid="uid://dxowlgd7n155j" path="res://scenes/player_ui.gd" id="2_6syxi"]
@@ -10,6 +10,10 @@
 [ext_resource type="Script" uid="uid://ctmbl5wh806o" path="res://scripts/life_text.gd" id="6_rkduv"]
 [ext_resource type="Texture2D" uid="uid://c2gtwe05dasih" path="res://assets/images/Death Icon.png" id="7_yplav"]
 [ext_resource type="Script" uid="uid://w3vacrwg08cy" path="res://scenes/objective_panel.gd" id="10_w058a"]
+[ext_resource type="VideoStream" uid="uid://b3rxe0yadfflp" path="res://assets/cutscenes/Respawn (1).ogv" id="11_l76gi"]
+[ext_resource type="Script" uid="uid://bf3gd181qbmwk" path="res://scenes/video_stream_player.gd" id="11_tii0l"]
+[ext_resource type="VideoStream" uid="uid://yj7hxk85c7r4" path="res://assets/cutscenes/Woohoo (1).ogv" id="11_xt7ap"]
+[ext_resource type="Script" uid="uid://7p1nmrjqb3jn" path="res://scenes/respawn_cutscene.gd" id="12_sahi7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ibxbq"]
 bg_color = Color(0, 0, 0, 0.588235)
@@ -187,3 +191,25 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("5_qey6e")
 text = "Objective | Find food to gain energy"
+
+[node name="RespawnCutscene" type="VideoStreamPlayer" parent="."]
+z_index = 5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("11_l76gi")
+expand = true
+script = ExtResource("12_sahi7")
+
+[node name="WohooCutscene" type="VideoStreamPlayer" parent="."]
+z_index = 5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("11_xt7ap")
+expand = true
+script = ExtResource("11_tii0l")
