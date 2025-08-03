@@ -21,6 +21,8 @@ const ROTATION_SPEED = 90.0
 @onready var FlyAnimation : AnimationPlayer = $Fly/AnimationPlayer
 @onready var FlyingSound : AudioStreamPlayer = $FlyingSound
 @onready var WalkingSound : AudioStreamPlayer = $WalkingSound
+@onready var Swatter : Node3D = $Swatter
+@onready var swatter_animation: AnimationPlayer = $Swatter/Hand_Rig/AnimationPlayer
 const MIN_PITCH = deg_to_rad(-(ROTATION_MAX_DEGREE))
 const MAX_PITCH = deg_to_rad(ROTATION_MAX_DEGREE)
 const CAMERA_SENSITIVITY = 0.01
@@ -30,13 +32,16 @@ var _target_camera_yaw := deg_to_rad(180)
 var _target_camera_pitch := deg_to_rad(-45)
 var _last_camera_yaw := 0.0
 
+var is_in_swatter_animation
+	
+
 func _rotateCamera() -> void:
 	TwistPivot.rotation.y = lerp_angle(TwistPivot.rotation.y, _target_camera_yaw, 0.1);
 	PitchPivot.rotation.x = lerp_angle(PitchPivot.rotation.x, _target_camera_pitch, 0.1);
 	
-func _rotateModel() -> void:
-	Model.rotation.x = -_target_camera_pitch;
-	Model.rotation.y = _target_camera_yaw - PI;
+func _rotateModel(model) -> void:
+	model.rotation.x = -_target_camera_pitch;
+	model.rotation.y = _target_camera_yaw - PI;
 
 func _handleMovement(delta) -> void:
 
@@ -110,21 +115,35 @@ func _ready() -> void:
 	GameState.player = self
 	_last_camera_yaw = _target_camera_yaw
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Swatter.visible = false
+	is_in_swatter_animation = false
+	Swatter.animation_finished.connect(swatter_animation_finished)
+	
+func swatter_animation_finished():
+	print("animation finished 2!")
+	if GameState.inside_food:
+		GameState.handle_death()
+	is_in_swatter_animation = false
 
 func _physics_process(delta: float) -> void:
 	# print("CAMERA - ", Camera.global_transform.basis.y);
 	# print("PITCH PIVOT - ", PitchPivot.global_transform.basis.y);
 	if !GameState.is_respawning && !GameState.is_dying:
 		_rotateCamera()
-		_rotateModel()
+		_rotateModel(Model)
+		_rotateModel(Swatter)
 		if is_on_floor():
 			_target_camera_pitch = deg_to_rad(-15)
 
 		_handleMovement(delta);
 		_decideAndApplyAnimation();	
 		if GameState.inside_food:
+			if not is_in_swatter_animation:
+				Swatter.start_swatter_animation()
 			if Input.is_action_pressed("eat"):
 				_on_eat_pressed(delta)
+		else:
+			Swatter.visible = false
 		if Input.is_action_just_pressed("respawn"):
 			GameState.set_respawn(global_transform.origin)
 		if velocity.y != 0:

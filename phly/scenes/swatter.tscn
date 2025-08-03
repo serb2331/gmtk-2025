@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqjjcldihiwdy"]
+
+[ext_resource type="Script" uid="uid://do0hu0oyovky6" path="res://scenes/swatter.gd" id="1_bb5xh"]
+[ext_resource type="PackedScene" uid="uid://b26kmntpns4as" path="res://scenes/hand_rig.tscn" id="1_olna2"]
+
+[node name="Swatter" type="Node3D"]
+script = ExtResource("1_bb5xh")
+
+[node name="Hand_Rig" parent="." instance=ExtResource("1_olna2")]
