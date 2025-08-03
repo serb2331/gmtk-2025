@@ -5,5 +5,6 @@ extends Node3D
 
 
 func _ready():
-	FoodGenerator.generate_food(self, food_scene)
+	FoodGenerator.set_food_props(self, food_scene)
+	FoodGenerator.generate_food()
 	SpiderGenerator.generate_spiders(self, spider_scene)

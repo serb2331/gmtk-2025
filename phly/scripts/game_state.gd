@@ -50,7 +50,6 @@ func set_respawn(location):
 		respawn_location = location
 		number_of_generations_survived += 1
 		is_respawning = false
-		emit_signal("respawned")
 
 func decrement_health():
 	health -= DECREMENT_VALUE
@@ -76,6 +75,8 @@ func handle_death():
 		player.global_position = respawn_location
 		is_dying = false
 		is_caught_in_web = false
+		FoodGenerator.generate_food()
+		emit_signal("respawned")
 	else:
 		if death_sound:
 			death_sound.play()
