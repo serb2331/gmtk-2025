@@ -39,7 +39,7 @@ func get_random_food() -> Node:
 	var food_scenes = [
 		load("res://assets/environment/food_items/SM_Apple.fbx"),
 		load("res://assets/environment/food_items/SM_Banana.fbx"),
-		load("res://assets/environment/food_items/SM_Bottle.fbx"),
+		load("res://assets/environment/food_items/SM_Spilled_Bottle.fbx"),
 		load("res://assets/environment/food_items/SM_Bread.fbx"),
 		load("res://assets/environment/food_items/SM_Pizza.fbx"),
 		load("res://assets/environment/food_items/SM_Pot.fbx")

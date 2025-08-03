@@ -16,9 +16,9 @@ var is_caught_in_web: bool
 var number_of_generations_survived: int
 
 
-const DECREMENT_VALUE = 3.0
+const DECREMENT_VALUE = 1.0
 const STARTING_FOOD = 0
-const starting_health_options := [100,50,80,120]
+const starting_health_options := [25,50,40,60]
 const starting_food_options := [0,20,0,5,15]
 const respawning_treshold := [60,80,90,80]
 const MIN_HEALTH = 0

@@ -1,50 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://dcsdewssu0eov"]
+[gd_scene load_steps=11 format=3 uid="uid://dcsdewssu0eov"]
 
 [ext_resource type="Script" uid="uid://dg5pkb4codc4x" path="res://scripts/food_bar.gd" id="1_ibxbq"]
 [ext_resource type="Script" uid="uid://dxowlgd7n155j" path="res://scenes/player_ui.gd" id="2_6syxi"]
 [ext_resource type="FontFile" uid="uid://dbypm7vmyvbs7" path="res://fonts/ferrum.otf" id="2_pmv6g"]
 [ext_resource type="PackedScene" uid="uid://drxhrjk6ox23k" path="res://scenes/pause_menu.tscn" id="4_6gmgv"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pxq32"]
-bg_color = Color(0.996078, 0.470588, 0.431373, 0.772549)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pmv6g"]
-bg_color = Color(0.788235, 0.054902, 0.121569, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="GDScript" id="GDScript_mow34"]
-resource_name = "life_bar"
-script/source = "extends ProgressBar
-
-@export var player_fly: CharacterBody3D
-
-const DECREMENT_INTERVAL = 1.0
-var cooldown
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	cooldown = 1.0
-	max_value = GameState.initialize_health()
-	pass # Replace with function body.
-
-func decrement_health_every_second(delta: float):
-	cooldown -= delta
-	if cooldown <= 0:
-		GameState.decrement_health()
-		cooldown = DECREMENT_INTERVAL
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	decrement_health_every_second(delta)
-	value = GameState.health
-		
-"
+[ext_resource type="Texture2D" uid="uid://dlmqqurtv4o5g" path="res://assets/images/Clock icon.png" id="5_6gmgv"]
+[ext_resource type="FontFile" uid="uid://vskax0le4ltp" path="res://fonts/BRLNSDB.TTF" id="5_qey6e"]
+[ext_resource type="Script" uid="uid://ctmbl5wh806o" path="res://scripts/life_text.gd" id="6_rkduv"]
+[ext_resource type="Texture2D" uid="uid://c2gtwe05dasih" path="res://assets/images/Death Icon.png" id="7_yplav"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ibxbq"]
 bg_color = Color(1, 0.635294, 0.431373, 0.784314)
@@ -70,58 +33,91 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("2_6syxi")
 
-[node name="LifeBar" type="ProgressBar" parent="PlayerUI"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -190.0
-offset_top = 56.0
-offset_right = -29.0
-offset_bottom = 83.0
-grow_horizontal = 0
-theme_override_styles/background = SubResource("StyleBoxFlat_pxq32")
-theme_override_styles/fill = SubResource("StyleBoxFlat_pmv6g")
-show_percentage = false
-script = SubResource("GDScript_mow34")
-
 [node name="FoodBar" type="ProgressBar" parent="PlayerUI"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -190.0
-offset_top = 115.0
-offset_right = -29.0
-offset_bottom = 142.0
+offset_left = -215.0
+offset_top = 53.0
+offset_right = -54.0
+offset_bottom = 74.0
 grow_horizontal = 0
 theme_override_styles/background = SubResource("StyleBoxFlat_ibxbq")
 theme_override_styles/fill = SubResource("StyleBoxFlat_s3viw")
 show_percentage = false
 script = ExtResource("1_ibxbq")
 
-[node name="Label2" type="Label" parent="PlayerUI"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -190.0
-offset_top = 93.0
-offset_right = -104.0
-offset_bottom = 116.0
-grow_horizontal = 0
-theme_override_fonts/font = ExtResource("2_pmv6g")
-text = "Food"
-
 [node name="NameLabel" type="Label" parent="PlayerUI"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -190.0
-offset_top = 30.0
-offset_right = -104.0
-offset_bottom = 53.0
+offset_left = -108.0
+offset_top = 29.0
+offset_right = -79.0
+offset_bottom = 52.0
 grow_horizontal = 0
 theme_override_fonts/font = ExtResource("2_pmv6g")
-text = "Life of Phly"
+text = "Phly"
+
+[node name="Timer" type="Control" parent="PlayerUI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="PlayerUI/Timer"]
+layout_mode = 0
+offset_left = -25.0
+offset_top = 23.0
+offset_right = 41.0
+offset_bottom = 60.0
+theme_override_fonts/font = ExtResource("5_qey6e")
+theme_override_font_sizes/font_size = 32
+text = "until"
+
+[node name="LifeText" type="Label" parent="PlayerUI/Timer"]
+light_mask = 513
+z_index = 2
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -89.0
+offset_top = 28.0
+offset_right = -41.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_qey6e")
+theme_override_font_sizes/font_size = 24
+text = "90"
+horizontal_alignment = 1
+script = ExtResource("6_rkduv")
+
+[node name="TextureRect" type="TextureRect" parent="PlayerUI/Timer"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -95.0
+offset_top = 15.0
+offset_right = -39.0
+offset_bottom = 71.0
+grow_horizontal = 2
+texture = ExtResource("5_6gmgv")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="PlayerUI/Timer"]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 16.0
+offset_right = 110.0
+offset_bottom = 72.0
+texture = ExtResource("7_yplav")
+expand_mode = 1
