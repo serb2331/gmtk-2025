@@ -1,13 +1,5 @@
 extends CharacterBody3D
 
-# i guess use m/s for speed and such(?)
-
-const SPEED = 18
-const FLY_VELOCITY = 0.2
-
-const ROTATION_MAX_DEGREE = 50	
-
-const GRAVITY_MULTIPLIER_WHEN_FLYING = 0.010
 const ACCELERATION = 8
 const MAX_SPEED = 1
 var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -15,16 +7,19 @@ var GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var TwistPivot : Node3D = $TwistPivot
 @onready var PitchPivot : Node3D = $TwistPivot/PitchPivot
 @onready var Camera := $TwistPivot/PitchPivot/Camera3D
-@onready var Model : Node3D = $Fly
-@onready var animation_tree: AnimationTree = $Fly/AnimationTree
-const ROTATION_SPEED = 90.0  
-@onready var FlyAnimation : AnimationPlayer = $Fly/AnimationPlayer
-@onready var FlyingSound : AudioStreamPlayer = $FlyingSound
-@onready var WalkingSound : AudioStreamPlayer = $WalkingSound
-const MIN_PITCH = deg_to_rad(-(ROTATION_MAX_DEGREE))
-const MAX_PITCH = deg_to_rad(ROTATION_MAX_DEGREE)
+@onready var CameraSpringArm := $CameraSpringArm
+@onready var Camera2 := $CameraSpringArm/Camera2
 const CAMERA_SENSITIVITY = 0.01
 const YAW_THRESHOLD = deg_to_rad(0.5)
+
+@onready var Model : Node3D = $FlyModel
+
+@onready var animation_tree: AnimationTree = $FlyModel/AnimationTree
+@onready var FlyAnimation : AnimationPlayer = $FlyModel/AnimationPlayer
+
+@onready var FlyingSound : AudioStreamPlayer = $FlyingSound
+@onready var WalkingSound : AudioStreamPlayer = $WalkingSound
+
 
 var _target_camera_yaw := deg_to_rad(180)
 var _target_camera_pitch := deg_to_rad(-45)
@@ -33,6 +28,9 @@ var _last_camera_yaw := 0.0
 func _rotateCamera() -> void:
 	TwistPivot.rotation.y = lerp_angle(TwistPivot.rotation.y, _target_camera_yaw, 0.1);
 	PitchPivot.rotation.x = lerp_angle(PitchPivot.rotation.x, _target_camera_pitch, 0.1);
+
+	CameraSpringArm.rotation.y = lerp_angle(CameraSpringArm.rotation.y, _target_camera_yaw, 0.1);
+	CameraSpringArm.rotation.x = lerp_angle(CameraSpringArm.rotation.x, _target_camera_pitch, 0.1);
 	
 func _rotateModel() -> void:
 	Model.rotation.x = -_target_camera_pitch;
