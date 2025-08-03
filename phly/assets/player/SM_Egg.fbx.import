@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cxe0grqynu1c3"
-path="res://.godot/imported/Kitchen_Environment.fbx-d0ab943c122b42287d889c1f3c268804.scn"
+uid="uid://c1ormggrljkig"
+path="res://.godot/imported/SM_Egg.fbx-1a240158aa78931ae2ac64ee465d6d08.scn"
 
 [deps]
 
-source_file="res://assets/environment/Kitchen_Environment.fbx"
-dest_files=["res://.godot/imported/Kitchen_Environment.fbx-d0ab943c122b42287d889c1f3c268804.scn"]
+source_file="res://assets/player/SM_Egg.fbx"
+dest_files=["res://.godot/imported/SM_Egg.fbx-1a240158aa78931ae2ac64ee465d6d08.scn"]
 
 [params]
 
@@ -34,17 +34,9 @@ animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={
 "materials": {
-"M_AssetPack_01": {
+"Blanket:M_Egg": {
 "use_external/enabled": true,
-"use_external/path": "uid://rto3nk10ahqj"
-},
-"M_AssetPack_02": {
-"use_external/enabled": true,
-"use_external/path": "uid://btfneqhlybgxp"
-},
-"M_Walls_Floor": {
-"use_external/enabled": true,
-"use_external/path": "uid://c6b21j5vxye7h"
+"use_external/path": "uid://v4depdew5av1"
 }
 }
 }
