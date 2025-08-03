@@ -1,15 +1,15 @@
 [gd_scene load_steps=14 format=3 uid="uid://dcsdewssu0eov"]
 
 [ext_resource type="Script" uid="uid://dg5pkb4codc4x" path="res://scripts/food_bar.gd" id="1_ibxbq"]
-[ext_resource type="Script" uid="uid://dxowlgd7n155j" path="res://scenes/player_ui.gd" id="2_6syxi"]
+[ext_resource type="Script" path="res://scenes/player_ui.gd" id="2_6syxi"]
 [ext_resource type="Texture2D" uid="uid://b72hlhvqy1ex7" path="res://assets/images/Energy Meter.png" id="3_rkduv"]
 [ext_resource type="PackedScene" uid="uid://drxhrjk6ox23k" path="res://scenes/pause_menu.tscn" id="4_6gmgv"]
 [ext_resource type="Texture2D" uid="uid://dlmqqurtv4o5g" path="res://assets/images/Clock icon.png" id="5_6gmgv"]
 [ext_resource type="FontFile" uid="uid://vskax0le4ltp" path="res://fonts/BRLNSDB.TTF" id="5_qey6e"]
 [ext_resource type="Texture2D" uid="uid://bbotksdj03tty" path="res://assets/images/Phly.png" id="6_00lqf"]
-[ext_resource type="Script" uid="uid://ctmbl5wh806o" path="res://scripts/life_text.gd" id="6_rkduv"]
+[ext_resource type="Script" path="res://scripts/life_text.gd" id="6_rkduv"]
 [ext_resource type="Texture2D" uid="uid://c2gtwe05dasih" path="res://assets/images/Death Icon.png" id="7_yplav"]
-[ext_resource type="Script" uid="uid://w3vacrwg08cy" path="res://scenes/objective_panel.gd" id="10_w058a"]
+[ext_resource type="Script" path="res://scenes/objective_panel.gd" id="10_w058a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ibxbq"]
 bg_color = Color(0, 0, 0, 0.588235)
