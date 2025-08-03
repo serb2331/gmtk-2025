@@ -17,13 +17,13 @@ _data = {
 script = ExtResource("2_s0x1o")
 
 [node name="Skeleton3D" parent="." index="0"]
-bones/0/position = Vector3(-0.391437, -0.747356, -0.669108)
-bones/0/rotation = Quaternion(-0.621991, -0.336345, 0.336345, 0.621991)
+bones/0/position = Vector3(-0.324148, 0.115046, -0.65633)
+bones/0/rotation = Quaternion(-0.34723, -0.422909, 0.0339108, 0.836319)
 bones/1/position = Vector3(46.853, 1.77636e-15, -0.373385)
-bones/1/rotation = Quaternion(0.950184, -0.125094, -0.283043, 0.0372633)
+bones/1/rotation = Quaternion(0.958202, 0.0055559, -0.285431, 0.0186514)
 bones/2/position = Vector3(9.21854, 1.77636e-15, 1.42109e-14)
 bones/2/rotation = Quaternion(1.45937e-18, 1.44164e-17, 6.93889e-18, 1)
-bones/3/rotation = Quaternion(0.634395, 0.30891, -0.459341, 0.539558)
+bones/3/rotation = Quaternion(0.745062, 0.381477, -0.278704, 0.470832)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 libraries = {
