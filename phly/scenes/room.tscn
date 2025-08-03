@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://browrbdltohk1"]
 
-[ext_resource type="Script" path="res://scripts/room.gd" id="1_4o3f6"]
+[ext_resource type="Script" uid="uid://coo0j4chw3x46" path="res://scripts/room.gd" id="1_4o3f6"]
 [ext_resource type="PackedScene" uid="uid://sggjfsxhpfgq" path="res://scenes/player_fly.tscn" id="1_88gup"]
 [ext_resource type="PackedScene" uid="uid://cfy70qk473650" path="res://scenes/kitchen_environment.tscn" id="2_bisa2"]
 [ext_resource type="Environment" uid="uid://dgohufk4uumqy" path="res://scene/WorldEnvironment.tres" id="3_01y1d"]
@@ -9,8 +9,8 @@
 [ext_resource type="AudioStream" uid="uid://dsullup1dunb0" path="res://assets/music/ambient/ambient1.wav" id="6_x5k2b"]
 [ext_resource type="PackedScene" uid="uid://bl65pjc431inu" path="res://scenes/spider.tscn" id="8_42v8c"]
 [ext_resource type="PackedScene" uid="uid://bo5j04m650c51" path="res://scenes/spider_web.tscn" id="10_qtoah"]
-[ext_resource type="PackedScene" path="res://assets/player/sm_egg.tscn" id="11_eom3m"]
-[ext_resource type="PackedScene" uid="uid://1ym5xt57led5" path="res://assets/envi_clutter.tscn" id="11_tk5fv"]
+[ext_resource type="PackedScene" uid="uid://y6boexhaiikj" path="res://assets/player/sm_egg.tscn" id="11_eom3m"]
+[ext_resource type="PackedScene" path="res://assets/envi_clutter.tscn" id="11_tk5fv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bisa2"]
 

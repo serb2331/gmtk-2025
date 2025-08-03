@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c5r27jnxhrw7k"]
+[gd_scene load_steps=17 format=3 uid="uid://c5r27jnxhrw7k"]
 
 [ext_resource type="Script" uid="uid://biqsk1bdq8k80" path="res://scripts/main_menu.gd" id="1_06t4h"]
 [ext_resource type="AudioStream" uid="uid://bouf44eqed222" path="res://assets/music/ambient/ambianta meniu.wav" id="2_8ln24"]
@@ -7,6 +7,8 @@
 [ext_resource type="FontFile" uid="uid://vskax0le4ltp" path="res://fonts/BRLNSDB.TTF" id="4_wu84c"]
 [ext_resource type="AudioStream" uid="uid://dxogfeyvr0kcu" path="res://assets/music/menu-sound/ui click.wav" id="6_oa1go"]
 [ext_resource type="AudioStream" uid="uid://psfmlj2ysh8q" path="res://assets/music/menu-sound/ui hover.wav" id="6_rtw2f"]
+[ext_resource type="Texture2D" uid="uid://b72qnweqc8uj3" path="res://assets/images/Credits.jpg" id="8_tbmy8"]
+[ext_resource type="Texture2D" uid="uid://2wqurn8eelrv" path="res://assets/images/How to play.jpg" id="9_jk1qb"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jix8l"]
 texture = ExtResource("2_wu84c")
@@ -25,6 +27,12 @@ keycode = 4194305
 
 [sub_resource type="Shortcut" id="Shortcut_jix8l"]
 events = [SubResource("InputEventKey_fu7sn")]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5dd4i"]
+texture = ExtResource("9_jk1qb")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tbmy8"]
+texture = ExtResource("8_tbmy8")
 
 [node name="Node2D" type="Control"]
 layout_mode = 3
@@ -123,6 +131,42 @@ volume_db = -19.81
 stream = ExtResource("6_rtw2f")
 volume_db = -10.267
 
+[node name="HowToPlayPanelButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HowToPlayPanel" type="Panel" parent="HowToPlayPanelButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_5dd4i")
+
+[node name="CreditsPanelButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CreditsPanel" type="Panel" parent="CreditsPanelButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_tbmy8")
+
 [connection signal="mouse_entered" from="VBoxContainer/StartButton" to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_button_pressed"]
 [connection signal="mouse_entered" from="VBoxContainer/HowToPlayButton" to="." method="_on_mouse_entered"]
@@ -131,3 +175,5 @@ volume_db = -10.267
 [connection signal="pressed" from="VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="mouse_entered" from="VBoxContainer/ExitButton" to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="HowToPlayPanelButton" to="." method="_on_how_to_play_button_pressed"]
+[connection signal="pressed" from="CreditsPanelButton" to="." method="_on_credits_panel_button_pressed"]

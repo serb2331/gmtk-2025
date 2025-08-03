@@ -3,7 +3,7 @@ extends Control
 
 @onready var name_label = $NameLabel
 func update_name_label():
-	name = "Life of Phly"
+	name = "Phly"
 	for i in range(1,GameState.number_of_generations_survived):
 		name += " Jr"
 	name_label.text = name
